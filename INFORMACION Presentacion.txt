@@ -1,1 +1,10 @@
 Usar Genially
+Coches Datos 
+https://www.cars-data.com/
+https://www.auto-data.net/es/
+
+Pelicula
+The movie database APi.
+
+base de datos 
+https://archive.ics.uci.edu/datasets o mas bien machine learning repository
