@@ -8,3 +8,9 @@ The movie database APi.
 
 base de datos 
 https://archive.ics.uci.edu/datasets o mas bien machine learning repository
+
+Lista de APIs
+https://github.com/public-apis/public-apis?tab=readme-ov-file
+https://github.com/public-api-lists/public-api-lists
+https://github.com/Kikobeats/awesome-api
+https://developers.google.com/admin-sdk/directory/v1/guides?hl=es-419
