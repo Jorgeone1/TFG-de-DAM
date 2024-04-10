@@ -26,4 +26,4 @@ try:
         email="laura@example.com"
     )
 except ValidationError as e:
-    print(e.json())
+    print("error")

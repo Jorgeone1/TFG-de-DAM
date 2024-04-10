@@ -154,8 +154,5 @@ Para la manipulación y generación de datos de fecha y hora.
 networkx:
 
 Si necesitas generar o trabajar con datos de redes y grafos.
-Imagenet:
 
-Aunque no es una biblioteca, Imagenet es una base de datos de imágenes extensamente utilizada en el campo del aprendizaje automático para el entrenamiento de modelos. Puedes acceder a sus datos a través de APIs o descargas directas.
-Página web: Imagenet
-http://www.image-net.org/
+
