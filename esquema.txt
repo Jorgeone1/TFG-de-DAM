@@ -1,1 +1,14 @@
-Nombres, direcciones, 
+España
+Nombres, direcciones,telefonos: Faker
+coches: https://www.auto-data.net/es/
+Contraseñas, correos, edad, genero, fecha nacimiento,numeros,Datos financieros: programado
+productos: carrefour, mercadona, coviran
+clima: api del tiempo, rapidapi
+futbol: transfermarket api
+Ingles
+Nombres, direcciones,telefonos: Faker
+coches: https://www.cars-data.com/
+Contraseñas, correos, edad, genero, fecha nacimiento,numeros,Datos financieros: programado
+productos: https://www.aldi.co.uk/,https://www.lidl.co.uk/,https://www.tesco.com/
+clima: api del tiempo, rapidapi
+futbol: transfermarket api

@@ -71,9 +71,6 @@ Faker es una biblioteca muy versátil y puede generar una amplia gama de datos f
     - Nombres de alimentos
     - Nombres de bebidas
 
-Esta lista solo cubre algunas de las posibilidades que ofrece Faker, y hay muchas más opciones disponibles dependiendo de tus necesidades específicas. Además, puedes personalizar y combinar estos datos para crear perfiles o registros más detallados y específicos.
-Pydantic, una biblioteca de Python utilizada para la validación de datos y la configuración basada en tipos, soporta una amplia gama de tipos de datos. Estos tipos de datos se basan en los tipos estándar de Python, pero también incluyen algunos tipos más avanzados y especializados proporcionados por la biblioteca. Aquí tienes una lista de los tipos de datos comúnmente usados en Pydantic:
-
 1. **Tipos Básicos de Python**:
    - `str`: Cadenas de texto.
    - `int`: Números enteros.

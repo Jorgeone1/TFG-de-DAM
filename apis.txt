@@ -1,26 +1,13 @@
 unplash
-el de weather
-Shutterstock
-Getty Images: Conocida por sus imágenes de calidad superior, es ideal para encontrar fotografías únicas y profesionales, aunque suele ser más costosa.
 
-Pixabay: Ofrece una amplia variedad de imágenes gratuitas de dominio público, así como vectores y arte gráfico.
+Adobe Stock: 
 
-Pexels: Similar a Unsplash, proporciona imágenes gratuitas de alta calidad. Es popular entre diseñadores y blogueros.
+Depositphotos: 
 
-Adobe Stock: Ofrece imágenes de alta calidad, incluyendo opciones de Adobe Photoshop y Adobe Illustrator. Es un servicio de pago, pero las imágenes son de excelente calidad.
-
-iStock by Getty Images: Ofrece imágenes de stock, videos y música. Tiene diferentes opciones de precios, incluyendo créditos y suscripciones.
-
-Depositphotos: Ofrece una amplia gama de imágenes de stock, vectores y videos a precios razonables.
-
-Flickr: Aunque es conocido como un sitio de compartición de fotos, Flickr también tiene una sección de imágenes con licencia Creative Commons que puedes usar gratuitamente, respetando los términos de la licencia.
-
-Canva: Además de ser una herramienta de diseño gráfico, Canva ofrece una gran cantidad de imágenes, algunas gratuitas y otras de pago.
-
-500px: Es una comunidad de fotografía que también vende imágenes. Es ideal para encontrar fotos artísticas y de alta calidad.
+500px: 
 
 World bank data
 
-dara european
+data european
 
-dbpedia
+dbpedia: poco probable, sus selects funcionan muy raro

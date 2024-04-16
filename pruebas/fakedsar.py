@@ -12,3 +12,4 @@ print("Texto:", fake.text())
 # Puedes generar también datos específicos para una localidad
 fake_es = Faker('es_ES') # para España, por ejemplo
 print("Nombre Español:", fake_es.name())
+print("Direccion Español:", fake_es.address())

@@ -2,9 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL de la página que quieres raspar
-url = 'https://stock.adobe.com/es/search?k=españa&search_type=usertyped'
+url = 'https://unsplash.com/es/s/fotos/coches'
 #https://stock.adobe.com/es/search?k=portugal&search_type=usertyped
 #https://imgur.com/search?q=españa
+#https://depositphotos.com/es/photos/coches.html?filter=all
+#https://unsplash.com/es/s/fotos/coches
 # Realiza una solicitud HTTP para obtener el contenido de la página
 response = requests.get(url)
 

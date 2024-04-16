@@ -1,0 +1,2 @@
+https://github.com/awesomedata/awesome-public-datasets
+https://datasetsearch.research.google.com/
