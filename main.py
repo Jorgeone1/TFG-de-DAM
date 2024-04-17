@@ -16,8 +16,6 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         partePrincipal = QGridLayout()
         central_widget.setLayout(partePrincipal)
-    
-        # Título, widget central izquierdo, etc. (código omitido para mayor claridad)
 
         # Widget central izquierdo
         widget_central_izquierdo = QWidget()
@@ -39,7 +37,7 @@ class MainWindow(QMainWindow):
         scrollArea.setWidget(widgetCuerpoIzquierda)
         izquierdo.addWidget(scrollArea)
         botonesNombre = ["NombreApellidos"]
-        # Botones en el QVBoxLayout
+        # Botones en el QVBoxLayout(Pruebas, luego recoradar cambiarlo)
         botones = []
         for i in range(1, 50):
             boton = QPushButton(f"Boton {i}")
@@ -56,7 +54,7 @@ class MainWindow(QMainWindow):
         Widget_derecho.setLayout(layout_derecho)
         partePrincipal.addWidget(Widget_derecho, 1, 1)
         
-        # Botón de borrar, ComboBox de idioma, Área de desplazamiento, etc. (código omitido para mayor claridad)
+        # Botón de borrar, ComboBox de idioma, Área de desplazamiento, etc.
         arriba_derecha_widget = QWidget()
         layout_arriba_derecho = QGridLayout()
         arriba_derecha_widget.setLayout(layout_arriba_derecho)
@@ -69,6 +67,7 @@ class MainWindow(QMainWindow):
         layout_arriba_derecho.addWidget(comboboxIdiomas,0,1)
         comboIdiomas = ["ES","EN"]
         comboboxIdiomas.addItems(comboIdiomas)
+
         # Área de desplazamiento para el cuerpo derecho
         scrollAreaL = QScrollArea()
         scrollAreaL.setWidgetResizable(True)
@@ -79,7 +78,6 @@ class MainWindow(QMainWindow):
         Vderecho = QVBoxLayout()
         cuerpoDerechoWidget.setLayout(Vderecho)
         scrollAreaL.setWidget(cuerpoDerechoWidget)  
-        # Establecer el cuerpo derecho como widget del área de desplazamiento
 
         #Widget Abajo de recha
         abajo_derecha = QWidget()
@@ -106,7 +104,7 @@ class MainWindow(QMainWindow):
         partePrincipal.setColumnMinimumWidth(1, 200)
         partePrincipal.setColumnStretch(0, 1)
         partePrincipal.setColumnStretch(1, 1)
-
+    #prueba pa el futuro
     def generar_boton(self, widget):
         # Crear un nuevo widget compuesto con un QLineEdit y un QPushButton
         widget_compuesto = QWidget()
@@ -129,10 +127,11 @@ class MainWindow(QMainWindow):
 
         # Agregar el widget compuesto al layout del widget pasado como argumento
         widget.layout().addWidget(widget_compuesto)
-
+    #filtro simple
     def filtrar_nombres(self, texto_filtro, botones):
         for boton in botones:
-            nombre_boton = boton.text()
+            nombre_boton = boton.text()#coje el nombre del texto
+            #cada vez que se cambia comprueba si tiene el mismo nombre que del line edit
             if texto_filtro.lower() in nombre_boton.lower():
                 boton.setVisible(True)
             else:
