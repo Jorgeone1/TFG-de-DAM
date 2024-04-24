@@ -1,0 +1,30 @@
+nombre
+direccion
+contraseña
+dni
+telefonos
+correos
+imagenes
+Matricula
+coches
+Seguridad Social
+deportes
+IBAN
+La otra parte del iban que mañana busco el nombre
+Numeros
+booleanos
+Fechas
+Direccion ip
+Pais
+Precio
+producto
+codigo de barra
+equipos
+Color
+Marca
+materiales
+Instituciones
+Codigo postal
+Libros
+ISBN
+Categoria
