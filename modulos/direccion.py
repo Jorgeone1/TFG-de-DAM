@@ -25,6 +25,6 @@ class DireccionWidget(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWindow = NombreWidget()
+    mainWindow = DireccionWidget()
     mainWindow.show()
     sys.exit(app.exec())

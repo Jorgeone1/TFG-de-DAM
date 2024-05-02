@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout,
 from modulos import nombres, direccion
 with open('./idiomas/español.json', 'r', encoding='utf-8') as archivo:
     datos = json.load(archivo)
-
+colorcuenta = 0
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -13,9 +13,11 @@ class MainWindow(QMainWindow):
         self.setGeometry(100, 100, 1000, 500)
         self.setWindowTitle("Generador de datos") 
         self.initUI()
+        
 
     def initUI(self):
         # Crear un widget central y establecer el diseño en él
+        self.widgets_creados = [] 
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         partePrincipal = QGridLayout()
@@ -46,16 +48,12 @@ class MainWindow(QMainWindow):
         claves_espanol = [
         "nombre", "direccion", "contraseña", "dni", "telefonos", "correos", 
         "imagenes", "Matricula", "coches", "SeguridadSocial", "deportes", 
-        "IBAN", "CCC", "Numeros", "booleanos", "Fechas", "DireccionIP", 
-        "Pais", "Precio", "producto", "codigoBarra", "equipos", "Color", 
-        "Marca", "materiales", "Instituciones", "CodigoPostal", "Libros", 
-        "ISBN", "Categoria"
-        ]
+        "IBAN", "Empresa", "Numeros", "booleanos", "Fechas", "DireccionIP", 
+        "Pais", "Precio", "producto", "codigoBarra", "Color", 
+        "Marca", "materiales", "Instituciones", "CodigoPostal", "Libros","ISBN", "Categoria"]
         # Botones en el QVBoxLayout(Pruebas, luego recoradar cambiarlo)
         botones = []
         botons = []
-        
-        
 
         # Establecer el estiramiento del QVBoxLayout del lado izquierdo
         partePrincipal.setColumnStretch(0, 1)  # La primera columna se estira para ocupar el espacio restante
@@ -76,6 +74,7 @@ class MainWindow(QMainWindow):
         botons.append(botonOtros)
         #Widget de borrar y idiomas
         BotonBorrar = QPushButton(datosesp["Borrar"])
+        BotonBorrar.clicked.connect(lambda: self.limpiar_cuerpo_derecho(cuerpoDerechoWidget))
         botons.append(BotonBorrar)
         layout_arriba_derecho.addWidget(BotonBorrar,0,0)
         
@@ -103,10 +102,13 @@ class MainWindow(QMainWindow):
 
         #boton confirmar y combobox de formato de salida
         botonConfirmar = QPushButton(datosesp["Confirmar"])
+        botonConfirmar.clicked.connect(lambda: self.Confirm(layout_derecho))
         botons.append(botonConfirmar)
         widgetnombre = nombres.NombreWidget()
         widgetdireccion = direccion.DireccionWidget()
-        botonConfirmar.clicked.connect(lambda: self.generar_boton(cuerpoDerechoWidget,widgetdireccion))
+        self.widgets_creados.append(widgetnombre)
+        self.widgets_creados.append(widgetdireccion)
+        botonOtros.clicked.connect(lambda: self.generar_boton(cuerpoDerechoWidget,widgetdireccion))
         layout_abajo_derecha.addWidget(botonConfirmar,0,0)  # Agregar el botón al layout derecho
         cantidad_numero = QLineEdit()
         layout_abajo_derecha.addWidget(cantidad_numero,0,1)
@@ -126,6 +128,7 @@ class MainWindow(QMainWindow):
             boton.clicked.connect(lambda: self.generar_boton(cuerpoDerechoWidget,widgetnombre))
             botones.append(boton)
             VLayoutCuerpoIzq.addWidget(boton)
+
         
         # Establecer el ancho mínimo del Widget_derecho
         Widget_derecho.setMinimumWidth(widget_central_izquierdo.sizeHint().width())
@@ -137,14 +140,20 @@ class MainWindow(QMainWindow):
         partePrincipal.setColumnStretch(1, 1)
         
     #prueba pa el futuro
-    def generar_boton(self, widget,widget_compuesto):
+    def generar_boton(self, widget, widget_compuesto):
+        # Verificar si ya existe un widget del mismo tipo en el cuerpo derecho
         for i in range(widget.layout().count()):
-            existing_widget = widget.layout().itemAt(i).widget()
+            existing_widget = widget.layout().itemAt(i)
             if isinstance(existing_widget, type(widget_compuesto)):
                 # Si ya existe un widget del mismo tipo, no hacer nada
                 return
+
         # Establecer un borde al widget compuesto
-        widget_compuesto.setStyleSheet("border: 1px solid gray;")
+        colorcuenta = widget.layout().count() % 2  # Alternar entre dos colores
+        if colorcuenta == 0:
+            widget_compuesto.setStyleSheet("QLabel{border: 1px solid black; background-color: blue;}")
+        else:
+            widget_compuesto.setStyleSheet("QLabel {border: 1px solid black; background-color: green;}")
 
         # Establecer la política de tamaño horizontal del widget compuesto como Expanding
         widget_compuesto.setSizePolicy(QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed))
@@ -185,6 +194,22 @@ class MainWindow(QMainWindow):
             for text in textlines:
                 text.setPlaceholderText(json[textos[i]])
                 i+=1
+    def Confirm(self, widget):
+        if widget.count() > 0:
+            lista = []
+            print(widget.count())
+            for i in range(widget.count()):
+                layout_item = widget.itemAt(i).widget().findChild(QLabel)
+                
+                if isinstance(layout_item,QLabel):
+                    for i in range(len(self.widgets_creados)):
+                        labe = self.widgets_creados[i].findChild(QLabel)
+                        if labe.text() == layout_item.text():
+                            dat = self.widgets_creados[i].getData(10)
+                            lista.append(dat)
+            print(lista)
+                
+
 def main():
     app = QApplication(sys.argv)
     window = MainWindow()
