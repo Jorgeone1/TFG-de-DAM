@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication, QCheckBox
+from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication, QCheckBox, QFrame
 import sys
 import random
 import pymongo
@@ -6,26 +6,31 @@ class NombreWidget(QWidget):
     def __init__(self):
         super().__init__()
         
+        #creamos los elementos del widget
         self.label = QLabel("Nombre:", self)
         self.editline = QLineEdit(self)
-        self.button = QPushButton("Click Me", self)
         self.checkbox = QCheckBox("Mi CheckBox")
         self.editline.setPlaceholderText("Nombre Proyecto")
+        
+        # Crear un QFrame sin un padre específico
+        self.frame = QFrame()
+        self.frame.setFrameShape(QFrame.Shape.Box)  # Establecer la forma del marco
+        self.frame.setLineWidth(2)  # Establecer el ancho del borde
+
+        #establecemos un layout al frame
         layout = QGridLayout()
+        self.frame.setLayout(layout)
+
+        #agregamos los elementos al frame
         layout.addWidget(self.label,0,0)
         layout.addWidget(self.editline,0,1)
-        layout.addWidget(self.button,1,0,2,0)
-        layout.addWidget(self.checkbox,1,2)
+        layout.addWidget(self.checkbox,1,0)
         
-        self.setLayout(layout)
-        
-        self.button.clicked.connect(self.on_button_clicked)
+        widget_creado = QGridLayout(self)
+        widget_creado.addWidget(self.frame)
         
         
-    def on_button_clicked(self):
-        nombre = self.editline.text()
-        print(random.uniform(0,9))
-        print("Nombre ingresado:", nombre)
+
 
     def getData(self,cantidad):
         titulo = self.editline.text()

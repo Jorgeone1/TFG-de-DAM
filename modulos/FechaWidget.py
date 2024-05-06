@@ -1,15 +1,16 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame
 import sys
-class DireccionWidget(QWidget):
+class FechaWidget(QWidget):
     def __init__(self):
         super().__init__()
         
-        #creamos los elementos de widget
-        self.label = QLabel("Direccion:", self)
+        #creamos los elementos del widget
+        self.label = QLabel("Fecha:", self)
         self.editline = QLineEdit(self)
-        self.COP = QCheckBox("Codigo Postal")
-        self.ciudad = QCheckBox("Ciudad")
-        self.Provincia = QCheckBox("Provincia")
+        self.largo = QCheckBox("Largo")
+        self.corto = QCheckBox("Corto")
+        self.separador = QLineEdit()
+        self.separador.setPlaceholderText("Separador")
         self.editline.setPlaceholderText("Nombre Proyecto")
 
         # Crear un QFrame sin un padre específico
@@ -17,25 +18,25 @@ class DireccionWidget(QWidget):
         self.frame.setFrameShape(QFrame.Shape.Box)  # Establecer la forma del marco
         self.frame.setLineWidth(2)  # Establecer el ancho del borde
 
-        #establecemos in layout al frame
+        #establecemos un layout al frame
         layout = QGridLayout()
         self.frame.setLayout(layout)
 
-        #añadimos los elementos al frame
+        #agregamos los elementos al frame
         layout.addWidget(self.label,0,0)
-        layout.addWidget(self.editline,0,1,1,3)
-        layout.addWidget(self.ciudad,1,0)
-        layout.addWidget(self.COP,1,1)
-        layout.addWidget(self.Provincia,1,2)
+        layout.addWidget(self.editline,0,1,1,2)
+        layout.addWidget(self.largo,1,0)
+        layout.addWidget(self.corto,1,1)
+        layout.addWidget(self.separador,1,2)
         
-        #establecemos layout al principal
+        #establecemos layout
         widget_creado = QGridLayout(self)
         widget_creado.addWidget(self.frame)
-
+        
         
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWindow = DireccionWidget()
+    mainWindow = FechaWidget()
     mainWindow.show()
     sys.exit(app.exec())

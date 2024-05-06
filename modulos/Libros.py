@@ -1,14 +1,13 @@
-import random
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame
 import sys
-class SegSolWidget(QWidget):
+class LibrosWidget(QWidget):
     def __init__(self):
         super().__init__()
         
-        #creamos elementos de widget
-        self.label = QLabel("Seguridad Social:", self)
+        #creamos los elementos de los widgets
+        self.label = QLabel("Libros:", self)
         self.editline = QLineEdit(self)
-        self.check = QCheckBox()
+        self.check = QCheckBox("En proceso")
         self.editline.setPlaceholderText("Nombre Proyecto")
         
         # Crear un QFrame sin un padre específico
@@ -32,19 +31,6 @@ class SegSolWidget(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWindow = SegSolWidget()
+    mainWindow = LibrosWidget()
     mainWindow.show()
     sys.exit(app.exec())
-
-def comprobarNaf():
-    
-    naf = "28"
-    for i in range(8):
-        naf= naf + str(round(random.uniform(0,9)))
-    if(int(naf[2:10])<10000000):#comprueba si los numeros del medio supera los 
-        numeros=((int(naf[:1])+int(naf[2:10]))*10000000)%97       
-    else:
-        numeros=int((int(naf[:10]))%97)#sino realizara otro tipo de operación
-    naf = naf +str(numeros)       
-    print(naf)   
-comprobarNaf()

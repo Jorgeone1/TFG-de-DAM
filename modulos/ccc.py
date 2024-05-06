@@ -1,5 +1,52 @@
 import random
 #Comprobación y operaciones del ccc
+from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame 
+import sys
+class CCCWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+        #crear los elementos del widget
+        self.label = QLabel("CCC:", self)
+        self.editline = QLineEdit(self)
+        self.IBAN = QCheckBox("IBAN")
+        self.noCC = QCheckBox("Sin CCC")
+        self.editline.setPlaceholderText("Nombre Proyecto")
+        self.IBAN.stateChanged.connect(self.bloquearCCC)
+        
+        # Crear un QFrame sin un padre específico
+        self.frame = QFrame()
+        self.frame.setFrameShape(QFrame.Shape.Box)  # Establecer la forma del marco
+        self.frame.setLineWidth(2)  # Establecer el ancho del borde
+
+        #Establecer layout del QFrame
+        frame_layout = QGridLayout()
+        self.frame.setLayout(frame_layout)
+
+        #Agregar los elementos al QFrame
+        frame_layout.addWidget(self.label, 0, 0)
+        frame_layout.addWidget(self.editline, 0, 1)
+        frame_layout.addWidget(self.IBAN, 1, 0)
+        frame_layout.addWidget(self.noCC, 1, 1)
+        
+        #Establecer el layout principal del widget
+        widget_layout = QGridLayout(self)
+        widget_layout.addWidget(self.frame)
+
+    def bloquearCCC(self,state):
+        if state == 2:  # 2 significa que el CheckBox está marcado
+            self.noCC.setEnabled(True)
+        else:
+            self.noCC.setEnabled(False)
+
+    def getData(self,cantidad):
+        comprobarIBAN()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    mainWindow = CCCWidget()
+    mainWindow.show()
+    sys.exit(app.exec())
+
 def comprobarIBAN():
     entidad = ""
     codigocuenta = ""
@@ -49,4 +96,3 @@ def CreadorIBAN(cuenta):
     return iban
 
 
-print(CreadorIBAN(comprobarIBAN()))
