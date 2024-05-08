@@ -46,5 +46,4 @@ def comprobarNaf():
     else:
         numeros=int((int(naf[:10]))%97)#sino realizara otro tipo de operación
     naf = naf +str(numeros)       
-    print(naf)   
-comprobarNaf()
+    return naf

@@ -1,7 +1,7 @@
 import sys
 import json
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QGridLayout, QLineEdit, QScrollArea, QComboBox,QSizePolicy, QFrame
-from modulos import booleanos,Categoria,ccc,coche,codigobarras,Color,contras,correo,deportes,direccion, Dni,Empresa,FechaWidget,imagenes,instituciones,IP,ISBN,Libros,materiales,Matricula,nombres,Numero,Otros,Pais,SegSol,telefono,producto
+from modulos import booleanos,Categoria,ccc,coche,codigobarras,Color,contras,deportes,direccion, Dni,Empresa,FechaWidget,imagenes,instituciones,IP,ISBN,Libros,materiales,Matricula,nombres,Numero,Otros,Pais,SegSol,telefono,producto
 from functools import partial
 with open('./idiomas/español.json', 'r', encoding='utf-8') as archivo:
     datos = json.load(archivo)
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         izquierdo.addWidget(scrollArea)
         
         self.claves_espanol = [
-        "nombre", "direccion", "contraseña", "dni", "telefonos", "correos", 
+        "nombre", "direccion", "contraseña", "dni", "telefonos", 
         "imagenes", "Matricula", "coches", "SeguridadSocial", "deportes", 
         "CCC", "Empresa", "Numeros", "booleanos", "Fechas", "DireccionIP", 
         "Pais", "producto", "codigoBarra", "Color", "materiales", "Instituciones", "Libros","ISBN", "Categoria"]
@@ -129,7 +129,6 @@ class MainWindow(QMainWindow):
             boton = QPushButton(f"{datosesp[self.claves_espanol[i]]}")
             boton.setObjectName(f"Boton {i}")  # Establecer un nombre único para cada botón
             widget_tipo = self.claves_espanol[i]
-            print(widget_tipo)
             boton.clicked.connect(partial(self.generar_boton, cuerpoDerechoWidget, widget_tipo))
             botones.append(boton)
             VLayoutCuerpoIzq.addWidget(boton)
@@ -157,8 +156,6 @@ class MainWindow(QMainWindow):
                 widget = Dni.DNIWidget()
             elif widget_tipo == "telefonos":
                 widget = telefono.TelefonoWidget()
-            elif widget_tipo == "correos":
-                widget = correo.CorreoWidget()
             elif widget_tipo == "imagenes":
                 widget = imagenes.ImagenesWidget()
             elif widget_tipo == "Matricula":
