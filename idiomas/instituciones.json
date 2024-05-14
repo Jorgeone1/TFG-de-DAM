@@ -1,0 +1,18 @@
+{
+    "ES": {
+        "Colegio": "Colegios",
+        "Universidad": "Universidad",
+        "Instituciones": "Instituciones:",
+        "Zona": "Zona",
+        "direccion": "direccion",
+        "NombreProyecto": "Nombre Proyecto"
+    },
+    "EN": {
+        "Colegio": "College",
+        "Universidad": "University",
+        "Instituciones": "Institutions:",
+        "Zona": "Area",
+        "direccion": "Address",
+        "NombreProyecto": "Project Name"
+    }
+}

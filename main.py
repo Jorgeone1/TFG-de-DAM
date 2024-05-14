@@ -1,7 +1,7 @@
 import sys
 import json
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QGridLayout, QLineEdit, QScrollArea, QComboBox,QSizePolicy, QFrame
-from modulos import booleanos,Categoria,ccc,coche,codigobarras,Color,contras,deportes,direccion, Dni,Empresa,FechaWidget,imagenes,instituciones,IP,ISBN,Libros,materiales,Matricula,nombres,Numero,Otros,Pais,SegSol,telefono,producto
+from modulos import booleanos,ccc,coche,codigobarras,Color,contras,direccion, Dni,Empresa,FechaWidget,imagenes,instituciones,IP,ISBN,Matricula,nombres,Numero,Otros,Pais,SegSol,telefono,id
 from functools import partial
 with open('./idiomas/español.json', 'r', encoding='utf-8') as archivo:
     datos = json.load(archivo)
@@ -9,7 +9,7 @@ colorcuenta = 0
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        self.idioma = "ES"
         self.setWindowTitle("Generador de datos")
         self.setGeometry(100, 100, 1000, 500)
         self.setWindowTitle("Generador de datos") 
@@ -45,12 +45,12 @@ class MainWindow(QMainWindow):
         scrollArea.setWidgetResizable(True)
         scrollArea.setWidget(widgetCuerpoIzquierda)
         izquierdo.addWidget(scrollArea)
-        
+        self.clave= []
         self.claves_espanol = [
         "nombre", "direccion", "contraseña", "dni", "telefonos", 
-        "imagenes", "Matricula", "coches", "SeguridadSocial", "deportes", 
+        "imagenes", "Matricula", "coches", "SeguridadSocial", "id",
         "CCC", "Empresa", "Numeros", "booleanos", "Fechas", "DireccionIP", 
-        "Pais", "producto", "codigoBarra", "Color", "materiales", "Instituciones", "Libros","ISBN", "Categoria"]
+        "Pais", "codigoBarra", "Color", "Instituciones","ISBN"]
         # Botones en el QVBoxLayout(Pruebas, luego recoradar cambiarlo)
         botones = []
         botons = []
@@ -78,10 +78,10 @@ class MainWindow(QMainWindow):
         botons.append(BotonBorrar)
         layout_arriba_derecho.addWidget(BotonBorrar,0,0)
         
-        comboboxIdiomas= QComboBox()
-        layout_arriba_derecho.addWidget(comboboxIdiomas,0,1)
+        self.comboboxIdiomas= QComboBox()
+        layout_arriba_derecho.addWidget(self.comboboxIdiomas,0,1)
         comboIdiomas = ["ES","EN"]
-        comboboxIdiomas.addItems(comboIdiomas)
+        self.comboboxIdiomas.addItems(comboIdiomas)
         
         # Área de desplazamiento para el cuerpo derecho
         scrollAreaL = QScrollArea()
@@ -128,86 +128,102 @@ class MainWindow(QMainWindow):
         for i in range(len(self.claves_espanol)):
             boton = QPushButton(f"{datosesp[self.claves_espanol[i]]}")
             boton.setObjectName(f"Boton {i}")  # Establecer un nombre único para cada botón
-            widget_tipo = self.claves_espanol[i]
-            boton.clicked.connect(partial(self.generar_boton, cuerpoDerechoWidget, widget_tipo))
+            widgettipo = self.claves_espanol[i]
+            boton.clicked.connect(partial(self.generar_boton, cuerpoDerechoWidget, widgettipo))
             botones.append(boton)
             VLayoutCuerpoIzq.addWidget(boton)
 
         
         # Establecer el ancho mínimo del Widget_derecho
         Widget_derecho.setMinimumWidth(widget_central_izquierdo.sizeHint().width())
-        comboboxIdiomas.currentIndexChanged.connect(lambda index:self.traducir(index,botones,botons,textolineas,datos))
+        self.comboboxIdiomas.currentIndexChanged.connect(lambda index:self.traduci(index,botones,botons,textolineas,datos))
         # Set the minimum width of the left and right columns and make them stretch equally
         partePrincipal.setColumnMinimumWidth(0, 200)
         partePrincipal.setColumnMinimumWidth(1, 200)
         partePrincipal.setColumnStretch(0, 1)
         partePrincipal.setColumnStretch(1, 1)
     
-    def generar_widget(self, widget_tipo):
+    def generar_widget(self, widgettipo):
         widget = None
-        if widget_tipo in self.claves_espanol:
-            if widget_tipo == "nombre":
+        if widgettipo in self.claves_espanol:
+            if widgettipo == "nombre":
                 widget = nombres.NombreWidget()
-            elif widget_tipo == "direccion":
+            elif widgettipo == "direccion":
                 widget = direccion.DireccionWidget()
-            elif widget_tipo == "contraseña":
+            elif widgettipo == "id":
+                widget = id.idWidget()
+                
+            elif widgettipo == "contraseña":
                 widget = contras.ContraWidget()
-            elif widget_tipo == "dni":
+                
+            elif widgettipo == "dni":
                 widget = Dni.DNIWidget()
-            elif widget_tipo == "telefonos":
+                
+            elif widgettipo == "telefonos":
                 widget = telefono.TelefonoWidget()
-            elif widget_tipo == "imagenes":
+                
+            elif widgettipo == "imagenes":
                 widget = imagenes.ImagenesWidget()
-            elif widget_tipo == "Matricula":
+            elif widgettipo == "Matricula":
                 widget = Matricula.MatriculaWidget()
-            elif widget_tipo == "coches":
+            elif widgettipo == "coches":
                 widget = coche.CocheWidget()
-            elif widget_tipo == "SeguridadSocial":
+                
+            elif widgettipo == "SeguridadSocial":
                 widget = SegSol.SegSolWidget()
-            elif widget_tipo == "deportes":
-                widget = deportes.DeporteWidget()
-            elif widget_tipo == "CCC":
+                
+            elif widgettipo == "CCC":
                 widget = ccc.CCCWidget()
-            elif widget_tipo == "Empresa":
-                widget =Empresa.EmpresaWidget()
-            elif widget_tipo == "Numeros":
+                
+            elif widgettipo == "Empresa":
+                widget =Empresa.EmpresaWidget("ES")
+                
+            elif widgettipo == "Numeros":
                 widget = Numero.NumeroWidget()
-            elif widget_tipo == "booleanos":
+            elif widgettipo == "booleanos":
                 widget = booleanos.BoolWidget()
-            elif widget_tipo == "Fechas":
-                widget = FechaWidget.FechaWidget()
-            elif widget_tipo == "DireccionIP":
+            elif widgettipo == "Fechas":
+                widget = FechaWidget.FechaWidget(self.idioma)
+                
+            elif widgettipo == "DireccionIP":
                 widget = IP.IPWidget()
-            elif widget_tipo == "Pais":
-                widget = Pais.PaisWidget()
-            elif widget_tipo == "producto":
-                widget = producto.ProductoWidget()
-            elif widget_tipo == "codigoBarra":
+                
+            elif widgettipo == "Pais":
+                widget = Pais.PaisWidget(self.idioma)
+                
+            elif widgettipo == "codigoBarra":
                 widget = codigobarras.BarraWidget()
-            elif widget_tipo == "Color":
+                
+            elif widgettipo == "Color":
                 widget = Color.ColorWidget()
-            elif widget_tipo == "materiales":
-                widget = materiales.MaterialWidget()
-            elif widget_tipo == "Instituciones":
-                widget = instituciones.InstitucionesWidget()
-            elif widget_tipo == "Libros":
-                widget = Libros.LibrosWidget()
-            elif widget_tipo == "ISBN":
+                
+            elif widgettipo == "Instituciones":
+                widget = instituciones.InstitucionesWidget(self.idioma)
+                
+            elif widgettipo == "ISBN":
                 widget = ISBN.ISBNWidget()
-            elif widget_tipo == "Categoria":
-                widget = Categoria.CategoriaWidget()
-            elif widget_tipo == "Otros":
+                
+            elif widgettipo == "Otros":
                 widget = Otros.OtrosWidget()
         if widget:
-            if widget not in self.widgets_creados or widget_tipo == "booleanos":
-                self.widgets_creados.append(widget)
-                print(self.widgets_creados)
+            self.widgets_creados.append(widget)
+            print(self.widgets_creados)
             return widget
     #prueba pa el futuro
-    def generar_boton(self, widget, widget_nombre):
+    def comprobarWidget(self,widgettipo):
+        if widgettipo =="booleanos" or widgettipo == "Numeros": 
+            return False
+        if widgettipo not in self.clave:
+            self.clave.append(widgettipo)
+            return False
+        else:
+            return True
+    def generar_boton(self, widget, widgetnombre):
         # Verificar si ya existe un widget del mismo tipo en el cuerpo derecho
-        widget_compuesto = self.generar_widget(widget_nombre)
-        if widget_nombre != "booleanos":
+        if  self.comprobarWidget(widgetnombre): 
+            return
+        widget_compuesto = self.generar_widget(widgetnombre)
+        if widgetnombre != "booleanos" and widgetnombre !="Numeros":
             for i in range(widget.layout().count()):
                 existing_widget = widget.layout().itemAt(i).widget().findChild(QLabel)
                 label2 = widget_compuesto.findChild(QLabel)
@@ -239,15 +255,17 @@ class MainWindow(QMainWindow):
                 boton.setVisible(True)
             else:
                 boton.setVisible(False)
-    def traducir(self,index,botones,botons,textlines,json):
+    def traduci(self,index,botones,botons,textlines,json):
             i = 0
+            
             botonss = ["Otros","Borrar","Confirmar"]
             textos = ["Buscador","Cantidad"]
-            if index == 0:
+            if  index == 0:
                 json = json["Español"]
             elif index == 1:
                 json = json["English"]
-
+            self.idioma = self.comboboxIdiomas.currentText()
+            
             for boton in botones:
                 boton.setText(json[self.claves_espanol[i]])
                 i+=1
@@ -259,19 +277,19 @@ class MainWindow(QMainWindow):
             for text in textlines:
                 text.setPlaceholderText(json[textos[i]])
                 i+=1
+            for widget in  self.widgets_creados:
+                widget.traducir(self.idioma)
     def Confirm(self, widget):
         if widget.count() > 0:
             lista = []
-            print(widget.count())
             for i in range(widget.count()):
                 layout_item = widget.itemAt(i).widget().findChild(QLabel)
                 
                 if isinstance(layout_item,QLabel):
                     for i in range(len(self.widgets_creados)):
-                        labe = self.widgets_creados[i].findChild(QLabel)
-                        if labe.text() == layout_item.text():
-                            dat = self.widgets_creados[i].getData(10)
-                            lista.append(dat)
+                        dat = self.widgets_creados[i-1].getData(10)
+
+                        lista.append(dat)
                                 
             print(lista)
        

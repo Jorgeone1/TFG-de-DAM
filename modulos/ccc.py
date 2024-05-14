@@ -1,7 +1,7 @@
 import random
 #Comprobación y operaciones del ccc
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame 
-import sys
+import sys,string
 class CCCWidget(QWidget):
     def __init__(self):
         super().__init__()
@@ -72,11 +72,8 @@ class CCCWidget(QWidget):
     def __comprobarIBAN(self):
         entidad = ""
         codigocuenta = ""
-        for i in range(8):
-            entidad = entidad + str(round(random.uniform(0,9)))
-
-        for i in range(10):
-            codigocuenta =codigocuenta+ str(round(random.uniform(0,9)))
+        entidad = entidad + "".join(random.choices(string.digits,k=8))
+        codigocuenta =codigocuenta+ "".join(random.choices(string.digits,k=10))
 
         num1=[4,8,5,10,9,7,3,6] #Guarda las operaciones para el primer digito en orden
         num2=[1,2,4,8,5,10,9,7,3,6] #Guarda las operaciones del segundo digito en orden

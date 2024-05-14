@@ -1,7 +1,7 @@
 import re
 import random
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame
-import sys
+import sys,string
 class DNIWidget(QWidget):
     def __init__(self):
         super().__init__()
@@ -46,15 +46,13 @@ class DNIWidget(QWidget):
         letnum2={0:"X",1:"Y",2:"Z"}
         if(dni):#Comprueba si el codigo que inserto el 
             dninuevo= ""
-            for i in range(8):
-                dninuevo = dninuevo + str(round(random.uniform(0,9)))
+            dninuevo = dninuevo + "".join(random.choices(string.digits,k=8))
             numeros = int(dninuevo[:8])-int((int(dninuevo[:8])/23))*23
             dninuevo = dninuevo + letras[numeros]
             return dninuevo
         else:#Comprueba si es un NIE
             nie = letnum2[round(random.uniform(0,2))]
-            for i in range(7):
-                nie = nie + str(round(random.uniform(0,9)))
+            nie = nie + "".join(random.choices(string.digits,k=7))
             
             numeros=int(letnum[nie[0].upper()]+nie[1:8])-(int(int(letnum[nie[0].upper()]+nie[1:8])/23)*23)
             return nie + letras[numeros]

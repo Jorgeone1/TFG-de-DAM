@@ -30,7 +30,9 @@ class TelefonoWidget(QWidget):
         widget_creados = QGridLayout(self)
         widget_creados.addWidget(self.frame)
         
-
+    
+    def getData(self,cantidad):
+        titulo = self.editline.text() or "Telefono"
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWindow = TelefonoWidget()
@@ -68,4 +70,3 @@ def crearTelefono(idioma,tipo):
                 telefono = telefono + str(round(random.uniform(0,9)))
             return telefono
         
-print(crearTelefono("EN",True))

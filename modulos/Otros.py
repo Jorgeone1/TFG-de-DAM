@@ -26,7 +26,9 @@ class OtrosWidget(QWidget):
         widget_creado = QGridLayout(self)
         widget_creado.addWidget(self.frame)
         
-        
+    
+    def getData(self,cantidad):
+        titulo = self.editline.text() or "Otros"
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

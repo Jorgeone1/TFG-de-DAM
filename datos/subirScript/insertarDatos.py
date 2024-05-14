@@ -27,5 +27,6 @@ for indice, elemento in enumerate(datos):
     # Insertar el documento en la colección de MongoDB
     coleccion.insert_one(documento)
 
+#compruebo que se subio
 print("Los datos se han subido exitosamente a MongoDB.")
 cliente.close()

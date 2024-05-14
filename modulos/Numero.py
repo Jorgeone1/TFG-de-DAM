@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QToolTip,QFrame
-import sys
+import sys,random,json
 class NumeroWidget(QWidget):
     def __init__(self):
         super().__init__()
@@ -37,7 +37,22 @@ class NumeroWidget(QWidget):
         
         widget_Creados = QGridLayout(self)
         widget_Creados.addWidget(self.frame)
-
+    
+    def getData(self,cantidad):
+        titulo = self.editline.text() or "Número"
+        lista = []
+        dicts = {}
+        for i in range(cantidad):
+            lista.append(self.getNum())
+        dicts[titulo] = lista
+        return dicts
+    def getNum(self):
+        num = 0
+        if self.entero.isChecked():
+            num = round(random.uniform(float(self.minimoe.text()),float(self.maximoe.text())))
+        else:
+            num = random.uniform(float(self.minimoe.text()),float(self.maximoe.text()))
+        return num
     def show_tooltip(self, event):
         # Mostrar un widget emergente personalizado cuando el mouse entra en el checkbox
         tooltip_text = "Selecciona solo enteros dentro de ese rango\n si hay decimales se redondea"

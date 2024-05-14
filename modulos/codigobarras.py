@@ -63,7 +63,7 @@ class BarraWidget(QWidget):
         #comprueba si esta checkeada o no
         rango = 11 if self.UPC.isChecked() else 12
         for i in range(rango):
-            barra = barra + str(round(random.uniform(0,9)))
+            barra = barra + str(random.randint(0,9))
         
         #saca el codigo de verificacion
         barra = barra + str(self.__Calcular_ultimo_digito(barra))
