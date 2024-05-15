@@ -1,0 +1,13 @@
+{
+    "ES":{
+        "Nombre": "Nombre",
+        "Apellido":"Apellido",
+        "Genero":"Genero"
+    },
+    "EN":{
+        "Nombre": "Name",
+        "Apellido":"Surname",
+        "Genero":"Gender"
+    }
+
+}

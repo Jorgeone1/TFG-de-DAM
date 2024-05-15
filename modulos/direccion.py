@@ -1,10 +1,9 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame
-import sys
-from faker import Faker
+import sys,requests
 class DireccionWidget(QWidget):
-    def __init__(self):
+    def __init__(self,idioma):
         super().__init__()
-        self.idioma = "ES"
+        self.idioma = idioma
         #creamos los elementos de widget
         self.label = QLabel("Direccion:", self)
         self.editline = QLineEdit(self)
@@ -35,34 +34,20 @@ class DireccionWidget(QWidget):
 
     def getData(self,cantidad):
         titulo = self.editline.text() or "Direccion"
-        if self.idioma == "ES":
-            faker = Faker("es_ES")
-        if self.idioma== "EN":
-            faker = Faker("en_GB")
-        ciudad = []
-        codigoPostal=[]
-        provincias =[]
-        direccion = []
+        url = f'http://127.0.0.1:5000/direccion/{self.idioma}/{cantidad}'
+        response = requests.get(url)
+        data = response.json()
         direcci = {}
-        for i in range(cantidad):
-            direccion.append(faker.address())
-            if self.COP.isChecked():
-                codigoPostal.append(faker.postcode())
-            if self.ciudad.isChecked():
-                ciudad.append(faker.region())
-            if self.Provincia.isChecked():
-                provincias.append(faker.city())
-        direcci[titulo] = direccion
+        direcci[titulo] = data["direccion"]
         if self.COP.isChecked():
-            direcci["Codigo Postal"] = codigoPostal
+            direcci["Codigo Postal"] = data["Codigo"]
         if self.ciudad.isChecked():
-            direcci["Ciudad"] = ciudad
+            direcci["Ciudad"] = data["Provincia"]
         if self.Provincia.isChecked():
-            direcci["Provincia"] = provincias
+            direcci["Provincia"] = data["ciudad"]
         return direcci
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWindow = DireccionWidget()
-    mainWindow.getData(1)
+    mainWindow = DireccionWidget("ES")
     mainWindow.show()
     sys.exit(app.exec())

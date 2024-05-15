@@ -1,8 +1,7 @@
 import sys
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout, QApplication, QCheckBox, QFrame
-import string
-import random
-import hashlib
+import requests
+
 class ContraWidget(QWidget):
     def __init__(self):
         super().__init__()
@@ -51,62 +50,16 @@ class ContraWidget(QWidget):
 
     def getData(self, cantidad):
         # Array con todas las letras del abecedario en minúscula
-        titulo = self.editline.text()
-        hashn = self.nombrehash.text()
-        if self.cantidad.text() == "":
-            return
-        if not titulo:
-            titulo = "Contraseña"
-        if not hashn:
-            hashn = "Hash"
-        Base = list(string.ascii_lowercase)
-        
-        list_password = [Base]
-        lista = []
-        hash = []
-        passwords = {}
-        # Array con todas las letras del abecedario en mayúscula
-        if self.mayus.isChecked():
-            uppercase_letters = list(string.ascii_uppercase)
-            list_password.append(uppercase_letters)
-        
-        # Array con los números del 0 al 9
-        if self.numeros.isChecked():
-            numbers = list(string.digits)
-            list_password.append(numbers)
-        
-        # Array con teclas especiales comunes
-        if self.especial.isChecked():
-            special_keys = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
-            list_password.append(special_keys)
-        
-        for i in range(cantidad):
-            text = ""
-            for j in range(int(self.cantidad.text())):
-                passs = random.choice(list_password)
-                text = text + random.choice(passs)
-            if self.hashchech.isChecked():
-                hashh = self.__hash_password(text)
-                hash.append(hashh)
-            lista.append(text)
-        passwords[titulo] = lista
+        titulo = self.editline.text() or "Contraseña"
+        hashn = self.nombrehash.text() or "Hash"
+        url = f"http://127.0.0.1:5000/contra/{cantidad}/{self.cantidad.text()}/{int(self.mayus.isChecked())}/{int(self.numeros.isChecked())}/{int(self.especial.isChecked())}"
+        response = requests.get(url)
+        data = response.json()
+        dicts ={}
+        dicts[titulo] = data["Contra"]
         if self.hashchech.isChecked():
-            passwords[hashn] = hash
-        return passwords
-    def __hash_password(self,password):
-        # Convertir la contraseña a bytes
-        password_bytes = password.encode('utf-8')
-
-        # Crear un objeto hash usando SHA-256
-        hash_object = hashlib.sha256()
-
-        # Actualizar el objeto hash con la contraseña
-        hash_object.update(password_bytes)
-
-        # Obtener el hash resultante en formato hexadecimal
-        hashed_password = hash_object.hexdigest()
-
-        return hashed_password
+            dicts[hashn] = data["hash"]
+        return dicts
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

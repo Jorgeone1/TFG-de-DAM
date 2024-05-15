@@ -157,7 +157,7 @@ class MainWindow(QMainWindow):
                 widget = contras.ContraWidget()
                 
             elif widgettipo == "dni":
-                widget = Dni.DNIWidget()
+                widget = Dni.DNIWidget("EN")
                 
             elif widgettipo == "telefonos":
                 widget = telefono.TelefonoWidget()
