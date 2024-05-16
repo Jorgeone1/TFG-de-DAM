@@ -114,7 +114,11 @@ def generararContrasena(cantidad,tamano,mayus,numer,espe):
     passwords["Contra"] = lista
     passwords["hash"] = hash
     return jsonify(passwords)
-def generarDni(idioma,dni):
+                
+@app.route("/dni/<int:cantidad>/<int:dni>/<idioma>")
+def generaDNI(cantidad,dni,idioma):
+    dnis = []
+    for i in range(cantidad):
         letras= "TRWAGMYFPDXBNJZSQVHLCKE" #lista en orden de los codigos
         letnum={"X":"0","Y":"1","Z":"2"} #diccionario para sustituirlas letras en el dni
         letnum2={0:"X",1:"Y",2:"Z"}
@@ -124,25 +128,20 @@ def generarDni(idioma,dni):
                 dninuevo = dninuevo + "".join(random.choices(string.digits,k=8))
                 numeros = int(dninuevo[:8])-int((int(dninuevo[:8])/23))*23
                 dninuevo = dninuevo + letras[numeros]
-                return dninuevo
+                dnis.append(dninuevo)
             elif idioma =="EN":
                 dninuevo = "".join(random.choices(string.digits,k=9))
-                return dninuevo
+                dnis.append(dninuevo)
         else:#Comprueba si es un NIE
             if idioma == "ES":
                 nie = letnum2[round(random.uniform(0,2))]
                 nie = nie + "".join(random.choices(string.digits,k=7))
                 
                 numeros=int(letnum[nie[0].upper()]+nie[1:8])-(int(int(letnum[nie[0].upper()]+nie[1:8])/23)*23)
-                return nie + letras[numeros]
+                dnis.append(nie + letras[numeros])
             else:
                 nie = "".join(random.choices(string.ascii_uppercase,k=2)) + random.choice(string.digits + "X")+"".join(random.choices(string.digits,k=6))
-                return nie        
-@app.route("/dni/<int:cantidad>/<int:dni>/<idioma>")
-def generaDNI(cantidad,dni,idioma):
-    dnis = []
-    for i in range(cantidad):
-        dnis.append(generarDni(idioma,bool(dni)))
+                dnis.append(nie)
     dicts = {"dni":dnis}
     return jsonify(dicts)
 
