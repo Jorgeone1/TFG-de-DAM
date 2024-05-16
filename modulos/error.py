@@ -1,4 +1,9 @@
 class ErrorPrograma(Exception):
-    pass
+    def __init__(self, mensaje):
+        super().__init__(mensaje)
+        self.mensaje = mensaje
 
-raise ErrorPrograma("Este es un mensaje de error personalizado")
+    def __str__(self):
+        return self.mensaje
+
+ 

@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame
-import sys,json,random,string
+import sys,requests
 class MatriculaWidget(QWidget):
     def __init__(self,idioma):
         super().__init__()
@@ -28,20 +28,12 @@ class MatriculaWidget(QWidget):
     
     def getData(self,cantidad):
         titulo = self.editline.text() or "Matricula"
-        lista = []
+        url = f"http://localhost:5000/matricula/{cantidad}/{self.idioma}"
         dicts = {}
-        for i in range(cantidad):
-            lista.append(self.getMatricula())
-        dicts[titulo]  = lista
+        response = requests.get(url)
+        data = response.json()
+        dicts[titulo]  = data["matricula"]
         return dicts
-    def getMatricula(self):
-        mat = ""
-        opciones = ['AA', 'AN', 'AD', 'UK', 'AO', 'AU', 'AO', 'UK', 'AV', 'AY', 'AV', 'UK', 'BA', 'BY', 'CA', 'CO', 'CK', 'GB', 'CP', 'CV', 'CT', 'GB', 'CW', 'CY', 'DA', 'DK', 'DI', 'GB', 'DL', 'DY', 'DX', 'GB', 'EA', 'EY', 'EJ', 'GB', 'FA', 'FP', 'FG', 'GB', 'FR', 'FY', 'FY', 'GB', 'GA', 'GO', 'GL', 'GP', 'GY', 'GV', 'HA', 'HJ', 'HF', 'HK', 'HY', 'KA', 'KL', 'KM', 'KM', 'KY', 'KR', 'LA', 'LJ', 'LK', 'LT', 'LR', 'GB', 'LU', 'LY', 'LX', 'GB', 'MA', 'MY', 'MW', 'GB', 'NA', 'NO', 'NP', 'NY', 'OA', 'OY', 'PA', 'PT', 'PU', 'PY', 'RA', 'RY', 'SA', 'SJ', 'SK', 'SO', 'SP', 'ST', 'SU', 'SW', 'SX', 'SY', 'VA', 'VY', 'WA', 'WJ', 'WK', 'WL', 'WL', 'WM', 'WY', 'YA', 'YK', 'YL', 'YU', 'YV', 'YY']
-        if self.idioma == "ES":
-            mat = "".join(random.choices(string.digits,k=4)) + "".join(random.choices([digit for digit in string.ascii_uppercase if digit != "Q"],k=3))
-        elif self.idioma=="EN":
-            mat = "".join(random.choice(opciones)) + "".join(random.choices(string.digits,k=2)) + "".join(random.choices(string.ascii_uppercase,k=3))
-        return mat
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

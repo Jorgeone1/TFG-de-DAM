@@ -2,9 +2,9 @@ from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout
 import sys, requests,random
 from bs4 import BeautifulSoup
 class ImagenesWidget(QWidget):
-    def __init__(self):
+    def __init__(self,idiomas):
         super().__init__()
-        
+        self.idioma = idiomas
         #creamos los elementos del widget
         self.label = QLabel("Imagenes:", self)
         self.editline = QLineEdit(self)
@@ -32,41 +32,16 @@ class ImagenesWidget(QWidget):
     
     def getData(self,cantidad):
         titulo = self.editline.text() or "Imagenes"
-        img = self.getImagenes()
+        url = f"http://localhost:5000/imagenes/{self.Buscador.text()}/{self.idioma}"
+        response = requests.get(url)
+        data = response.json()
+        img = data["imagenes"]
+        print(len(img))
         dicts = {}
         lis = random.choices(img,k=cantidad)
         dicts[titulo] = lis
         return dicts
-    def getImagenes(self):
-
-        urls = [f'https://unsplash.com/es/s/fotos/{self.Buscador.text()}',f"https://stock.adobe.com/es/search?k={self.Buscador.text()}&search_type=usertyped"
-               ,f"https://depositphotos.com/es/photos/{self.Buscador.text()}.html?filter=all"
-               ]
-        lista = []
-        for url in urls:
-            # Realiza una solicitud HTTP para obtener el contenido de la página
-            response = requests.get(url)
-            
-            # Verifica si la solicitud fue exitosa
-            if response.status_code == 200:
-                # Parsea el contenido HTML de la página
-                soup = BeautifulSoup(response.text, 'html.parser')
-                
-                # Encuentra todas las etiquetas "img" en la página
-                img_tags = soup.find_all('img')
-                hola = ""
-                
-                # Itera a través de las etiquetas "img" y obtén el atributo "src"
-                for img_tag in img_tags:
-                    src = img_tag.get('src')
-                    if src:
-                        if "secure" not in src and "betrad" not in src:
-                            print(src)
-                            lista.append(src)
-                        
-            else:
-                print("No se pudo acceder a la página")
-        return lista
+    
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWindow = ImagenesWidget()

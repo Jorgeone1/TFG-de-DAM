@@ -1,7 +1,6 @@
-import sys
-import json
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QGridLayout, QLineEdit, QScrollArea, QComboBox,QSizePolicy, QFrame
-from modulos import booleanos,ccc,coche,codigobarras,Color,contras,direccion, Dni,Empresa,FechaWidget,imagenes,instituciones,IP,ISBN,Matricula,nombres,Numero,Otros,Pais,SegSol,telefono,id
+import sys,json
+from PyQt6.QtWidgets import QMessageBox, QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QGridLayout, QLineEdit, QScrollArea, QComboBox,QSizePolicy, QFrame
+from modulos import error,booleanos,ccc,coche,codigobarras,Color,contras,direccion, Dni,Empresa,FechaWidget,imagenes,instituciones,IP,ISBN,Matricula,nombres,Numero,Otros,Pais,SegSol,telefono,id
 from functools import partial
 with open('./idiomas/español.json', 'r', encoding='utf-8') as archivo:
     datos = json.load(archivo)
@@ -147,64 +146,64 @@ class MainWindow(QMainWindow):
         widget = None
         if widgettipo in self.claves_espanol:
             if widgettipo == "nombre":
-                widget = nombres.NombreWidget()
+                widget = nombres.NombreWidget(self.idioma)
             elif widgettipo == "direccion":
-                widget = direccion.DireccionWidget()
+                widget = direccion.DireccionWidget(self.idioma)
             elif widgettipo == "id":
-                widget = id.idWidget()
+                widget = id.idWidget(self.idioma)
                 
             elif widgettipo == "contraseña":
-                widget = contras.ContraWidget()
+                widget = contras.ContraWidget(self.idioma)
                 
             elif widgettipo == "dni":
                 widget = Dni.DNIWidget("EN")
                 
             elif widgettipo == "telefonos":
-                widget = telefono.TelefonoWidget()
+                widget = telefono.TelefonoWidget(self.idioma)
                 
             elif widgettipo == "imagenes":
-                widget = imagenes.ImagenesWidget()
+                widget = imagenes.ImagenesWidget(self.idioma)
             elif widgettipo == "Matricula":
-                widget = Matricula.MatriculaWidget()
+                widget = Matricula.MatriculaWidget(self.idioma)
             elif widgettipo == "coches":
-                widget = coche.CocheWidget()
+                widget = coche.CocheWidget(self.idioma)
                 
             elif widgettipo == "SeguridadSocial":
-                widget = SegSol.SegSolWidget()
+                widget = SegSol.SegSolWidget(self.idioma)
                 
             elif widgettipo == "CCC":
-                widget = ccc.CCCWidget()
+                widget = ccc.CCCWidget(self.idioma)
                 
             elif widgettipo == "Empresa":
-                widget =Empresa.EmpresaWidget("ES")
+                widget =Empresa.EmpresaWidget(self.idioma)
                 
             elif widgettipo == "Numeros":
-                widget = Numero.NumeroWidget()
+                widget = Numero.NumeroWidget(self.idioma)
             elif widgettipo == "booleanos":
-                widget = booleanos.BoolWidget()
+                widget = booleanos.BoolWidget(self.idioma)
             elif widgettipo == "Fechas":
                 widget = FechaWidget.FechaWidget(self.idioma)
                 
             elif widgettipo == "DireccionIP":
-                widget = IP.IPWidget()
+                widget = IP.IPWidget(self.idioma)
                 
             elif widgettipo == "Pais":
                 widget = Pais.PaisWidget(self.idioma)
                 
             elif widgettipo == "codigoBarra":
-                widget = codigobarras.BarraWidget()
+                widget = codigobarras.BarraWidget(self.idioma)
                 
             elif widgettipo == "Color":
-                widget = Color.ColorWidget()
+                widget = Color.ColorWidget(self.idioma)
                 
             elif widgettipo == "Instituciones":
                 widget = instituciones.InstitucionesWidget(self.idioma)
                 
             elif widgettipo == "ISBN":
-                widget = ISBN.ISBNWidget()
+                widget = ISBN.ISBNWidget(self.idioma)
                 
             elif widgettipo == "Otros":
-                widget = Otros.OtrosWidget()
+                widget = Otros.OtrosWidget(self.idioma)
         if widget:
             self.widgets_creados.append(widget)
             print(self.widgets_creados)
@@ -246,6 +245,7 @@ class MainWindow(QMainWindow):
         for i in reversed(range(widget.layout().count())):
             widget.layout().itemAt(i).widget().setParent(None)
         self.widgets_creados = []
+        self.clave=[]
     #filtro simple
     def filtrar_nombres(self, texto_filtro, botones):
         for boton in botones:
@@ -280,18 +280,21 @@ class MainWindow(QMainWindow):
             for widget in  self.widgets_creados:
                 widget.traducir(self.idioma)
     def Confirm(self, widget):
-        if widget.count() > 0:
-            lista = []
-            for i in range(widget.count()):
-                layout_item = widget.itemAt(i).widget().findChild(QLabel)
-                
-                if isinstance(layout_item,QLabel):
-                    for i in range(len(self.widgets_creados)):
-                        dat = self.widgets_creados[i-1].getData(10)
+        try:
+            if widget.count() > 0:
+                lista = []
+                for i in range(widget.count()):
+                    layout_item = widget.itemAt(i).widget().findChild(QLabel)
+                    
+                    if isinstance(layout_item,QLabel):
+                        for i in range(len(self.widgets_creados)):
+                            dat = self.widgets_creados[i-1].getData(10)
 
-                        lista.append(dat)
-                                
-            print(lista)
+                            lista.append(dat)
+                                    
+                print(lista)
+        except error.ErrorPrograma as e:
+            QMessageBox.warning(self,"Error",e.mensaje)
        
 
 def main():

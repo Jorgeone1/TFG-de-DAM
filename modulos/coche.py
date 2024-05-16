@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox,QFrame
-import sys, random
+import sys, random,requests
 import sqlite3 as sq
 class CocheWidget(QWidget):
-    def __init__(self):
+    def __init__(self,idiomas):
         super().__init__()
-        self.idioma ="ES"
+        self.idioma =idiomas
         #Creamos los elementos del Widget
         self.label = QLabel("Coche:", self)
         self.editline = QLineEdit(self)
@@ -54,40 +54,20 @@ class CocheWidget(QWidget):
         titulo = self.editline.text() or "Coches"
         mar = self.marcno.text() or "Marca"
         ti = self.tipono.text() or "Tipo"
-        nom = []
-        tip = []
-        marc =[]
         dicts = {}
-        for i in range(cantidad):
-            dat = self.generarCoche()
-            nom.append(dat[0])
-            if self.Tipo.isChecked():
-                tip.append(dat[1])
-            if self.Marca.isChecked():
-                marc.append(dat[2])
-        dicts[titulo] = nom
+        url = f"http://localhost:5000/coches/{cantidad}/{self.idioma}"
+        response = requests.get(url)
+        data = response.json()
+        dicts[titulo] = data["modelo"]
         if self.Tipo.isChecked():
-            dicts[ti] = tip
+            dicts[ti] = data["tipo"]
         if self.Marca.isChecked():
-            dicts[mar] = marc
+            dicts[mar] = data["marca"]
         return dicts
     
-    def generarCoche(self):
-        #comprueba el idioma para seleccionar la base de datos
-        if self.idioma== "ES":
-            conectar = sq.connect("./datos/Sqlite/CochesES.db")
-        if self.idioma =="EN":
-            conectar = sq.connect("./datos/Sqlite/CochesEN.db")
-        cursor = conectar.cursor()
-        #selecciona un random
-        num = round(random.uniform(1,12539))
-        cursor.execute(f"Select Coches.modelo, Coches.tipo ,Marca.nombre from Coches inner join Marca on Coches.id_coche = Marca.id where Coches.id =  {num}")
-        datos = cursor.fetchone()
-        return datos
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWindow = CocheWidget()
-    mainWindow.generarCoche()
+    mainWindow.generarCoches()
     mainWindow.show()
     sys.exit(app.exec())
