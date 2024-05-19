@@ -40,3 +40,5 @@ colegios españoles
 https://www.educacion.gob.es/centros/buscarCentros
 colegios ingleses:
 https://www.compare-school-performance.service.gov.uk/schools-by-type?step=default&table=schools&region=all-england&for=secondary
+
+https://www.programiz.com/python-programming/docstrings

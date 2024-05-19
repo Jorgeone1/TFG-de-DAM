@@ -1,0 +1,12 @@
+{
+    "ES":{
+        "CodigoBarras":"Codigo de Barras",
+        "NombreProyecto":"Nombre Proyecto",
+        "ayuda1": "UPC: 12 Digitos\nEAN:13 Digitos(Default)"
+    },
+    "EN":{
+        "CodigoBarras": "Barcode",
+        "NombreProyecto": "Project Name",
+        "ayuda1": "UPC: 12 Digits\nEAN: 13 Digits (Default)"
+    }
+}

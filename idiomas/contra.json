@@ -1,0 +1,28 @@
+{
+    "ES":{
+        "contra": "Contraseña",
+        "numeros":"Numeros",
+        "NombreProyecto":"Nombre Proyecto",
+        "TeclasEs":"Teclas Especiales",
+        "mayus": "Mayusculas",
+        "longitud":"Longitud contraseña",
+        "nombrehash": "Nombre Hash",
+        "ayuda1":"Añade números a la contraseña",
+        "ayuda2":"Añade mayusculas a la contraseña",
+        "ayuda3":"Añade teclas especiales a la contraseña",
+        "ayuda4":"Crea un Hash a la contraseña"
+    },
+    "EN":{
+        "contra": "Password",
+        "numeros": "Numbers",
+        "NombreProyecto":"Name Project",
+        "TeclasEs": "Special Keys",
+        "mayus": "Uppercase Letters",
+        "longitud": "Password Length",
+        "nombrehash": "Hash Name",
+        "ayuda1": "Adds numbers to the password",
+        "ayuda2": "Adds uppercase letters to the password",
+        "ayuda3": "Adds special keys to the password",
+        "ayuda4": "Creates a hash for the password"
+    }
+}

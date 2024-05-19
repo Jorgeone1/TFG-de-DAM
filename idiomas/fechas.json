@@ -1,6 +1,15 @@
 {
     "ES": {
         "1": "Enero",
+        "01": "Enero",
+        "02": "Febrero",
+        "03": "Marzo",
+        "04": "Abril",
+        "05": "Mayo",
+        "06": "Junio",
+        "07": "Julio",
+        "08": "Agosto",
+        "09": "Septiembre",
         "2": "Febrero",
         "3": "Marzo",
         "4": "Abril",
@@ -15,11 +24,14 @@
         "Fecha": "Fecha",
         "Largo": "Largo",
         "Corto": "Corto",
-        "Obligatorio": "Obligatorio (usar formato dd-mm-aaaa)",
+        "Obligatorio": "Obligatorio (dd-mm-aaaa)",
         "FechaInicio": "Fecha Inicio",
         "FechaFinal": "Fecha Final",
-        "Separador": "Separador",
-        "NombreProyecto": "Nombre Proyecto"
+        "Separador": "Separador(Formato Corto)",
+        "NombreProyecto": "Nombre Proyecto",
+        "ayuda1":"formato de largo (dia de mes de año)\nCorto (dia{separador}mes{separador}año{separador})",
+        "error1":"La fecha no es valida o el separador no esta permitido",
+        "error2":"La fecha final debe ser mayor al de inicio"
     },
     "EN": {
         "1": "January",
@@ -31,16 +43,29 @@
         "7": "July",
         "8": "August",
         "9": "September",
+        "01": "January",
+        "02": "February",
+        "03": "March",
+        "04": "April",
+        "05": "May",
+        "06": "June",
+        "07": "July",
+        "08": "August",
+        "09": "September",
         "10": "October",
         "11": "November",
         "12": "December",
         "Fecha": "Date",
         "Largo": "Long",
         "Corto": "Short",
-        "Obligatorio": "Required (use format dd-mm-yyyy)",
+        "Obligatorio": "Required (dd-mm-yyyy)",
         "FechaInicio": "Start Date",
         "FechaFinal": "End Date",
-        "Separador": "Separator",
-        "NombreProyecto": "Project Name"
+        "Separador": "Separator(Short format)",
+        "NombreProyecto": "Project Name",
+        "ayuda1":"long format (day of the month of the year)\n(day{separator}month{separator}year{separator})",
+        "error1":"The date is invalid or the separator is not allowed",
+        "error2":"The end date must be longer than the start date"
+
     }
 }

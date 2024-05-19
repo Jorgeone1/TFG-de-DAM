@@ -1,0 +1,20 @@
+{
+    "ES":{
+        "Booleanos":"Booleanos",
+        "NombreTrue":"Nombre True",
+        "NombreFalse":"Nombre False",
+        "Opcional": "Opcional",
+        "NombreProyecto": "Nombre Proyecto",
+        "ayuda1":"Sustituye True por otro valor",
+        "ayuda2":"Sustituye False por otro valor"
+    },
+    "EN":{
+        "Booleanos": "Booleans",
+        "NombreTrue": "Name True",
+        "NombreFalse": "Name False",
+        "Opcional": "Optional",
+        "NombreProyecto": "Project Name",
+        "ayuda1":"Replace True with another value",
+        "ayuda2":"Replace False with another value"
+    }
+}

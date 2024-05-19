@@ -1,0 +1,32 @@
+ {
+    "ES":{
+        "direccion":"Direccion",
+        "codpop":"Código Postal",
+        "Comunidad": "Comunidad Autonoma",
+        "Provincia":"Provincia",
+        "NombreProyecto": "Nombre Proyecto",
+        "NombreCOP":"Nombre Código Postal",
+        "NombreCiudad":"Nombre Ciudad",
+        "NombreProv": "Nombre Provincia",
+        "nodirec":"Sin Direccion",
+        "ayuda1":"Genera un Código Postal",
+        "ayuda2":"Genera una comunidad Autonoma",
+        "ayuda3":"Genera una provincia",
+        "ayuda4":"Elimina direccion de la columna"
+    },
+    "EN":{
+        "direccion": "Address",
+        "codpop": "Postal Code",
+        "Comunidad": "Region",
+        "Provincia": "City",
+        "NombreProyecto": "Project Name",
+        "NombreCOP":"Postal Code Name",
+        "NombreCiudad":"City Name",
+        "NombreProv": "Region Name",
+        "nodirec":"No Address",
+        "ayuda1": "Generates a Postal Code",
+        "ayuda2": "Generates an Region",
+        "ayuda3": "Generates a City",
+        "ayuda4":"Remove Column Address"
+    }
+ }

@@ -1,0 +1,28 @@
+ {
+    "ES":{
+        "numeros":"Numeros",
+        "Entero":"Entero",
+        "NombreProyecto":"Nombre Proyecto",
+        "obligatorio":"Obligatorio",
+        "minimo": "Minimo: ",
+        "maximo":"Maximo: ",
+        "decimales":"Decimales",
+        "ayuda1":"Elige enteros en vez de decimales",
+        "ayuda2":"Elige cantidad de decimales",
+        "error1":"Hay que poner datos validos",
+        "error2":"Tiene que ser un Numero Valido"
+    },
+    "EN":{
+        "numeros": "Numbers",
+        "Entero": "Integer",
+        "NombreProyecto": "Project Name",
+        "obligatorio": "Mandatory",
+        "minimo": "Minimum: ",
+        "maximo": "Maximum: ",
+        "decimales": "Decimals",
+        "ayuda1": "Choose integers instead of decimals",
+        "ayuda2": "Choose the number of decimals",
+        "error1": "You must enter valid data",
+        "error2":"You must choose a valid number"
+    }
+ }

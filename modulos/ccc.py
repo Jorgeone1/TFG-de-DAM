@@ -1,21 +1,43 @@
 import random
 #Comprobación y operaciones del ccc
-from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame 
-import sys,string
+from PyQt6.QtWidgets import QWidget, QToolTip,QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame 
+import sys,requests, json
 class CCCWidget(QWidget):
-    def __init__(self):
+    """
+        Clase que genera un widget con sus componentes, ademas envia un diccionario con CCC y sus respectivos IBAN
+    Args:
+        QWidget (QWidget): Extiende de la clase de QWidget
+    """    
+    def __init__(self,idiomas):
         super().__init__()
+        """
+            Inicia el widget y sus componentes mas las propiedades
+        Args:
+            idiomas (String): Recoge el idioma la cual el widget estara traducido
+        """      
+        #Se abre el archivo JSON
+        self.idioma= idiomas
+        with open('./idiomas/ccc.json', 'r', encoding='utf-8') as archivo:
+            self.datos = json.load(archivo)
+        self.datas = self.datos[self.idioma]
+
         #crear los elementos del widget
         self.label = QLabel("CCC:", self)
         self.editline = QLineEdit(self)
         self.IBAN = QCheckBox("IBAN")
         self.noCC = QCheckBox("Sin CCC")
+        self.ibanline = QLineEdit()
+
+        #Propiedades del Widget
         self.noCC.setEnabled(False)
         self.editline.setPlaceholderText("Nombre Proyecto")
         self.IBAN.stateChanged.connect(self.bloquearCCC)
-        self.ibanline = QLineEdit()
         self.ibanline.setPlaceholderText("Nombre IBAN")
         self.ibanline.setEnabled(False)
+        self.IBAN.enterEvent = self.showHelpIBAN
+        self.IBAN.leaveEvent = self.HideHelp
+        self.noCC.enterEvent = self.showHelpCCC
+        self.noCC.leaveEvent = self.HideHelp
         # Crear un QFrame sin un padre específico
         self.frame = QFrame()
         self.frame.setFrameShape(QFrame.Shape.Box)  # Establecer la forma del marco
@@ -27,17 +49,69 @@ class CCCWidget(QWidget):
 
         #Agregar los elementos al QFrame
         frame_layout.addWidget(self.label, 0, 0)
-        frame_layout.addWidget(self.editline, 0, 1)
+        frame_layout.addWidget(self.editline, 0, 1,1,2)
         frame_layout.addWidget(self.IBAN, 1, 0)
-        frame_layout.addWidget(self.noCC, 1, 1)
-        frame_layout.addWidget(self.ibanline,2,0,1,2)
+        frame_layout.addWidget(self.noCC, 1, 2)
+        frame_layout.addWidget(self.ibanline,2,0,1,3)
         
         #Establecer el layout principal del widget
         widget_layout = QGridLayout(self)
         widget_layout.addWidget(self.frame)
+    def traducir(self, nuevo_idioma):
+        """
+            Metodo que cambia el idioma de todo el widget
+        Args:
+            nuevo_idioma (String): idioma nuevo a cambiar
+        """
+        #Cambia el idioma del parametro
+        self.idioma = nuevo_idioma
+        self.datas = self.datos[self.idioma]
+        
+        #cambia los valores del widget
+        self.label.setText(self.datas["noCCC"])
+        self.noCC.setText(self.datas["noCCC"])
+        self.editline.setPlaceholderText(self.datas["NombreProyecto"])
+        self.ibanline.setPlaceholderText(self.datas["Nombre IBAN"])
 
+    def showHelpCCC(self, event):
+        """
+            Muestra un QToolTip en la posicion del Widget
+        Args:
+            event (QEvent): El evento que activa la muestra del tooltip.
+        """
+        # Muestra un bocadillo o una mini ventana que pone el mensaje de ayuda
+        tooltip_text = self.datas["ayuda1"]
+        # Calcular la posición central del QCheckBox
+        QToolTip.showText(self.noCC.mapToGlobal(self.noCC.rect().center()), tooltip_text)
+
+    def showHelpIBAN(self, event):
+        """
+            Muestra un QToolTip en la posicion del Widget
+        Args:
+            event (QEvent): El evento que activa la muestra del tooltip.
+        """
+        # Muestra un bocadillo o una mini ventana que pone el mensaje de ayuda
+        tooltip_text = self.datas["ayuda2"]
+        # Calcular la posición central del QCheckBox
+        QToolTip.showText(self.IBAN.mapToGlobal(self.IBAN.rect().center()), tooltip_text)
+    
+    def HideHelp(self, event):
+        """
+            Esconde el QToolTip al salir del widget con el raton
+        Args:
+            event (QEvent): El evento que activa la escondida del tooltip.
+        """
+        # La ventana se esconde para que no este todo el rato activo
+        QToolTip.hideText()
+
+    #Evitar errores de logica bloqueando los botones necesarios
     def bloquearCCC(self,state):
-        if state == 2:  # 2 significa que el CheckBox está marcado
+        """
+            Metodo que bloquea el o desbloque el checkbox no CC
+        Args:
+            state (int): comprueba el estado del checkbox
+        """        
+        if state == 2:  
             self.noCC.setEnabled(True)
             self.ibanline.setEnabled(True)
         else:
@@ -46,76 +120,37 @@ class CCCWidget(QWidget):
             self.ibanline.setEnabled(False)
 
     def getData(self,cantidad):
+        """
+            Devuelve una lista de datos recogida en el RESTAPI
+        Args:
+            cantidad (int): Cantidad de datos que quiere devolver
+
+        Returns:
+            dict: devuelve un diccionario con los datos elegidos
+        """
         #Comprueba que tenga texto los lineEdit sino sera uno predeterminado
         title = self.editline.text() or "CCC"
         iban_name = self.ibanline.text() or "IBAN"
-        #Creacion de lista para guardar datos
-        listaCCC = []
-        listaIBAN = []
+
+        #Recoge los datos del REST API
+        url = f"http://localhost:5000/IBAN/{str(cantidad)}"
+        response = requests.get(url)
+        data = response.json()
         datosBancarios  = {}
-        for i in range(cantidad):
-            cc = self.__comprobarIBAN()
-            iba =self.__CreadorIBAN(cc)
-            listaCCC.append(cc)
-            listaIBAN.append(iba)
-        #depende de los check del checkbox
+        #Comprueba los checkbox pulsados
         if self.IBAN.isChecked():
-            datosBancarios[iban_name] = listaIBAN
+            datosBancarios[iban_name] = data["iban"]
             if not self.noCC.isChecked():
-                datosBancarios[title] = listaCCC
+                datosBancarios[title] = data["ccc"]
         else:
-            datosBancarios[title] = listaCCC
+            datosBancarios[title] = data["ccc"]
         return datosBancarios
 
 
 
-    def __comprobarIBAN(self):
-        entidad = ""
-        codigocuenta = ""
-        entidad = entidad + "".join(random.choices(string.digits,k=8))
-        codigocuenta =codigocuenta+ "".join(random.choices(string.digits,k=10))
-
-        num1=[4,8,5,10,9,7,3,6] #Guarda las operaciones para el primer digito en orden
-        num2=[1,2,4,8,5,10,9,7,3,6] #Guarda las operaciones del segundo digito en orden
-        
-        digito1=self.__primerDigito(entidad,num1) #Realiza las operaciones del digito 1
-        digito2=self.__segundoDigito(codigocuenta,num2) #Realiza las operaciones del digito 2
-        total= f"{digito1}{digito2}" #los junta
-        return entidad + total + codigocuenta   #devuelve un booleano si coinciden o no
-
-    #operaciones del primer digito
-    def __primerDigito(self,entidad,num1):
-        numeros=0
-        for po in range(0,8): #for que realiza las operaciones
-            numeros= numeros + (int(entidad[po])*num1[po])
-        resto=numeros%11
-        
-        if(resto==1):
-            return 1
-        else:
-            return int(11- resto)
-        
-    #Operaciones con el segundo digito
-    def __segundoDigito(self,codigocuenta,num2):
-        numeros2=0
-        for pi in range(0,len(num2)): # for que realiza las operaciones
-            numeros2= numeros2 + (int(codigocuenta[pi])*num2[pi])
-        resto2=11-(numeros2%11)
-        if(resto2==10):
-            return 1
-        else:
-            return resto2
-        
-    def __CreadorIBAN(self,cuenta):
-        total=cuenta+"142800" 
-        numerosiban=98-(int(total)%97) #realiza la operación para calcular los numeros de despues del ES
-        if(len(str(numerosiban))==1):
-            numerosiban="0" + str(numerosiban) #Crea un iban pero con los numeros creados por las operaciones 
-        iban="ES"+str(numerosiban)+cuenta
-        return iban
-
+    
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWindow = CCCWidget()
+    mainWindow = CCCWidget("ES")
     mainWindow.show()
     sys.exit(app.exec())

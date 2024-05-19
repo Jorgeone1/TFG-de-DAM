@@ -1,0 +1,26 @@
+{
+    "ES":{
+        "Coche":"Coche",
+        "Marca":"Marca",
+        "Tipo":"Tipo",
+        "MarcaNom": "Marca Nombre(Opcional)",
+        "TipoNom": "Tipo Nombre(Opcional)",
+        "NombreProyecto":"Nombre Proyecto",
+        "Seleccionar":"Seleccionar",
+        "ayuda1": "Muestra el tipo del coche(electrico, gasolina, etc)",
+        "ayuda2":"Muestra la Marca del coche",
+        "ayuda3": "Selecciona la marca del coche que quieres generar\nsi es - generara cualquier coche"
+    },
+    "EN":{
+        "Coche": "Car",
+        "Marca": "Brand",
+        "Tipo": "Type",
+        "MarcaNom": "Brand Name (Optional)",
+        "TipoNom": "Type Name (Optional)",
+        "NombreProyecto": "Project Name",
+        "Seleccionar": "Select",
+        "ayuda1":"It shows the type of car (electric, gasoline, etc.)",
+        "ayuda2":"Display the car brand.",
+        "ayuda3":"Select the car brand you want to generate. If it is '-', any car will be generated."
+    }
+}

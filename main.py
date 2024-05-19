@@ -156,7 +156,7 @@ class MainWindow(QMainWindow):
                 widget = contras.ContraWidget(self.idioma)
                 
             elif widgettipo == "dni":
-                widget = Dni.DNIWidget("EN")
+                widget = Dni.DNIWidget(self.idioma)
                 
             elif widgettipo == "telefonos":
                 widget = telefono.TelefonoWidget(self.idioma)
@@ -287,8 +287,8 @@ class MainWindow(QMainWindow):
                     layout_item = widget.itemAt(i).widget().findChild(QLabel)
                     
                     if isinstance(layout_item,QLabel):
-                        for i in range(len(self.widgets_creados)):
-                            dat = self.widgets_creados[i-1].getData(10)
+                        for i in range(0,len(self.widgets_creados)):
+                            dat = self.widgets_creados[i].getData(1000)
 
                             lista.append(dat)
                                     

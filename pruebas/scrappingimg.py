@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL de la página que quieres raspar
-url = 'https://unsplash.com/es/s/fotos/coches'
+url = 'https://imgur.com/search?q=españa'
 #https://stock.adobe.com/es/search?k=portugal&search_type=usertyped
 #https://imgur.com/search?q=españa
 #https://depositphotos.com/es/photos/coches.html?filter=all

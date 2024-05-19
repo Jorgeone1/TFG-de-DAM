@@ -1,0 +1,28 @@
+{
+     "ES":{
+        "empresa": "Empresa",
+        "direccion":"direccion empresa",
+        "web":"web empresa",
+        "NombreProyecto":"NombreProyecto",
+        "Zona":"Zona Empresa",
+        "nombredireccion":"Nombre Dirección",
+        "nombreweb":"Nombre Web",
+        "nombreprovincia":"Nombre Provincia",
+        "ayuda1": "Muestra la direccion de la empresa",
+        "ayuda2":"Muestra la web de la empresa\n(Al ser datos de prueba seran el mismo link)",
+        "ayuda3":"Muestra la Zona de la empresa"
+     },
+     "EN":{
+        "empresa": "Company",
+        "direccion": "Company Address",
+        "web": "Phone Company",
+        "NombreProyecto": "Project Name",
+        "nombredireccion":"Address Name",
+        "nombreweb":"Phone Company Name",
+        "nombreprovincia":"Company Zone Name",
+        "Zona": "Company Zone",
+        "ayuda1": "Shows the company's address",
+        "ayuda2": "Shows the company's Phone",
+        "ayuda3": "Shows the company's zone"
+     }
+}

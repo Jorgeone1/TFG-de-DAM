@@ -1,0 +1,18 @@
+{
+    "ES":{
+        "noCCC":"Sin CCC",
+        "NombreProyecto":"Nombre Proyecto(Opcional)",
+        "Nombre IBAN":"Nombre IBAN(Opcional)",
+        "ayuda1":"Genera solo el IBAN",
+        "ayuda2":"Genera la version IBAN del CCC"
+
+    },
+    "EN":{
+        "noCCC": "No CCC",
+        "NombreProyecto": "Project Name(Optional)",
+        "Nombre IBAN": "IBAN Name(Optional)",
+        "ayuda1": "Generates only the IBAN",
+        "ayuda2": "Generates the IBAN version of the CCC"
+    
+    }
+}

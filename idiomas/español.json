@@ -1,7 +1,7 @@
 {
     "Español": {
       "nombre": "Nombre",
-      "id": "id",
+      "id": "id unico",
       "direccion": "Dirección",
       "contraseña": "Contraseña",
       "dni": "DNI",
@@ -18,7 +18,7 @@
       "DireccionIP": "Direccion IP",
       "Pais": "Pais",
       "producto": "Producto",
-      "codigoBarra": "codigoBarra",
+      "codigoBarra": "Codigo de Barras",
       "Color": "Color",
       "Instituciones": "Instituciones",
       "ISBN": "ISBN",
@@ -30,7 +30,7 @@
     },
     "English": {
       "nombre": "Name",
-      "id":"id",
+      "id":"id unique",
       "direccion": "Address",
       "contraseña": "Password",
       "dni": "ID",

@@ -1,8 +1,23 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame
-import sys
+import sys,json
 class OtrosWidget(QWidget):
-    def __init__(self):
+    """
+        Clase que genera un widget con sus componentes la cula el usuario subira un archivo csv y de este generara datos 
+    Args:
+        QWidget (QWidget): Extiende de la clase de QWidget
+    """    
+    def __init__(self,idiomas):
+        """
+            Inicia el widget y sus componentes mas las propiedades
+        Args:
+            idiomas (String): Recoge el idioma la cual el widget estara traducido
+        """      
         super().__init__()
+        #guardamos el idioma y abrimos el json
+        self.idioma = idiomas
+        with open('./idiomas/codigobarras.json', 'r', encoding='utf-8') as archivo:
+            self.datos = json.load(archivo)
+        self.datas = self.datos[self.idioma]
         #creamos los elementos del widget
         self.label = QLabel("Otros:", self)
         self.editline = QLineEdit(self)

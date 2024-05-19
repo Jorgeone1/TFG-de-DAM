@@ -1,0 +1,14 @@
+{
+    "ES":{
+        "Dni":"DNI",
+        "NIE":"NIE",
+        "NombreProyecto":"Nombre Proyecto",
+        "ayuda1":"Crea documentos NIE en vez de DNI"
+    },
+    "EN":{
+        "Dni": "ID",
+        "NIE": "Passport",
+        "NombreProyecto": "Project Name",
+        "ayuda1": "Creates Passport documents instead of ID"
+    }
+}

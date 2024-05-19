@@ -1,0 +1,10 @@
+{
+    "ES": {
+        "NombreProyecto": "Nombre Proyecto",
+        "ayuda1": "Convierte el formato de IPv4 a IPv6"
+    },
+    "EN": {
+        "NombreProyecto": "Project Name",
+        "ayuda1": "Converts the format from IPv4 to IPv6"
+    }
+}

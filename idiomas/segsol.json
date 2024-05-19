@@ -1,0 +1,10 @@
+{
+    "ES":{
+        "segsol":"Seguridad Social",
+        "NombreProyecto":"Nombre Proyecto"
+    },
+    "EN":{
+        "segsol": "Social Security",
+        "NombreProyecto": "Project Name"
+    }
+}

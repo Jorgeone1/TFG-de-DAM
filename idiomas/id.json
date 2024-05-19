@@ -1,0 +1,35 @@
+{
+    "ES":{
+        "id":"unico id",
+        "NombreProyecto": "Nombre Proyecto",
+        "inicio": "Inicio Numero:",
+        "opcional":"Opcional",
+        "formato":"Formato: ",
+        "incrementar:":"Incrementar: ",
+        "error1":"Debe estar limpio el {}",
+        "error2":"No puede haber mas de un {}",
+        "error3":"No puede haber {} sin cerrar",
+        "error4": "Error en el programa",
+        "error5":"No puede Contener {{}}",
+        "ayuda1": "Representa el numero de inicio",
+        "ayuda2": "El numero que se sumara para aumentar la secuencia",
+        "ayuda3": "Poner un {} dentro del formato para introducir el numero\n Ejemplo: Ejemplo{} KG"
+    },
+    "EN":{
+        "id": "unique id",
+        "NombreProyecto": "Project Name",
+        "inicio": "Start Number:",
+        "opcional": "Optional",
+        "formato": "Format: ",
+        "incrementar:": "Increment: ",
+        "error1": "It must be clean the {}",
+        "error2": "There cannot be more than one {}",
+        "error3": "There cannot be an unclosed {}",
+        "error4": "Program error",
+        "error5": "There cannot have {{}}",
+        "ayuda1": "Represents the starting number",
+        "ayuda2": "The number that will be added to increase the sequence",
+        "ayuda3": "Place a {} within the format to introduce the number\n Example: Example{} KG"
+    }
+
+}

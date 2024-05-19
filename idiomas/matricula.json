@@ -1,0 +1,11 @@
+{
+    "ES":{
+        "Matricula":"Matricula de Coche",
+        "NombreProyecto":"Nombre Proyecto"
+        
+    },
+    "EN":{
+        "Matricula":"Car license plate",
+        "NombreProyecto":"Name Project"
+    }
+}

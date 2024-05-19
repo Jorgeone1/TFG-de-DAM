@@ -1,23 +1,49 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame,QComboBox
-import sys,json, pymongo
+from PyQt6.QtWidgets import QWidget, QToolTip, QLabel, QLineEdit, QPushButton, QGridLayout,QApplication,QCheckBox, QFrame,QComboBox
+import sys,json, pymongo, requests,random
 class InstitucionesWidget(QWidget):
+    """
+        Clase que genera un widget con sus componentes, además devuelve una lista de colegios o universidades del pais seleccionado 
+    Args:
+        QWidget (QWidget): Extiende de la clase de QWidget
+    """    
     def __init__(self,idioma):
         super().__init__()
+        """
+            Inicia el widget y sus componentes mas las propiedades
+        Args:
+            idiomas (String): Recoge el idioma la cual el widget estara traducido
+        """      
+        #guardamos el idioma y abrimos el json
         self.idioma = idioma
         with open('./idiomas/instituciones.json', 'r', encoding='utf-8') as archivo:
             self.datos = json.load(archivo)
-        self.data = self.datos[self.idioma]
+        self.datas = self.datos[self.idioma]
         #creamos los elementos del widget 
-        self.label = QLabel(self.data["Instituciones"], self)
+        self.label = QLabel(self.datas["Instituciones"], self)
         self.editline = QLineEdit(self)
-        self.zona = QCheckBox(self.data["Zona"])
-        self.direccion = QCheckBox(self.data["direccion"])
-        self.editline.setPlaceholderText(self.data["NombreProyecto"])
+        self.zona = QCheckBox(self.datas["Zona"])
+        self.direccion = QCheckBox(self.datas["direccion"])
         self.Colegio = QComboBox()
-        self.Colegio.addItems([self.data["Colegio"],self.data["Universidad"]])
-        self.Colegio.currentIndexChanged.connect(self.cambiarIndice)
         self.Comunidad = QComboBox()
+        self.zonatext = QLineEdit()
+        self.direcciontext = QLineEdit()
+        #Propiedades de los widgets
+        self.zonatext.setPlaceholderText(self.datas["NombreZona"])
+        self.direcciontext.setPlaceholderText(self.datas["NombreDireccion"])
+        self.editline.setPlaceholderText(self.datas["NombreProyecto"])
+        self.Colegio.addItems([self.datas["Colegio"],self.datas["Universidad"]])
+        self.Colegio.currentIndexChanged.connect(self.cambiarIndice)
+        self.zonatext.setEnabled(False)
+        self.direcciontext.setEnabled(False)
+        #eventos
+        self.zona.enterEvent = self.showHelpZona
+        self.zona.leaveEvent = self.hideHelp
+        self.direccion.enterEvent = self.showHelpArea
+        self.direccion.leaveEvent = self.hideHelp
         self.rellenarDatos()
+        self.zona.stateChanged.connect(lambda state:self.bloquearLine(state,self.zonatext))
+        self.direccion.stateChanged.connect(lambda state:self.bloquearLine(state,self.direcciontext))
+        
         # Crear un QFrame sin un padre específico
         self.frame = QFrame()
         self.frame.setFrameShape(QFrame.Shape.Box)  # Establecer la forma del marco
@@ -32,30 +58,78 @@ class InstitucionesWidget(QWidget):
         layout.addWidget(self.editline,0,1,1,3)
         layout.addWidget(self.Colegio,1,0)
         layout.addWidget(self.Comunidad,1,1)
-        layout.addWidget(self.zona,1,2)
-        layout.addWidget(self.direccion,1,3)
-        
+        layout.addWidget(self.zona,2,0)
+        layout.addWidget(self.zonatext,2,1)
+        layout.addWidget(self.direccion,3,0)
+        layout.addWidget(self.direcciontext,3,1)
+
         #establecemois laoyut
         widget_creado = QGridLayout(self)
         widget_creado.addWidget(self.frame)
-    
+    def bloquearLine(self,state,editline):
+        """
+        Bloquea o activa los cuadro de texto correspondiente a su checkbox
+
+        Args:
+            state (int):comprueba el estado del checbox
+            editline (QEditLine): cuadro de texto a bloquear o desbloquear
+        """        
+        if state== 2:
+            editline.setEnabled(True)
+        else:
+            editline.setEnabled(False)
+    def showHelpZona(self, event):
+        """
+        Muestra un QToolTip en la posición del Widget
+        Args:
+            event (QEvent): El evento que activa la muestra del tooltip.
+        """
+        tooltip_text = self.datas["ayuda1"]
+        QToolTip.showText(self.zona.mapToGlobal(self.zona.rect().center()), tooltip_text)
+    def showHelpArea(self, event):
+        """
+        Muestra un QToolTip en la posición del Widget
+        Args:
+            event (QEvent): El evento que activa la muestra del tooltip.
+        """
+        tooltip_text = self.datas["ayuda2"]
+        QToolTip.showText(self.direccion.mapToGlobal(self.direccion.rect().center()), tooltip_text)
+    def hideHelp(self, event):
+        """
+        Oculta el QToolTip
+        Args:
+            event (QEvent): El evento que activa la ocultación del tooltip.
+        """
+        QToolTip.hideText() 
     def traducir(self, idioma):
+        """
+            Metodo que cambia el idioma de todo el widget
+        Args:
+            nuevo_idioma (String): idioma nuevo a cambiar
+        """
         self.idioma = idioma
-        self.data = self.datos[self.idioma]
-        self.label.setText(self.data["Instituciones"])
-        self.editline.setPlaceholderText(self.data["NombreProyecto"])
-        self.zona.setText(self.data["Zona"])
-        self.direccion.setText(self.data["direccion"])
-        self.Colegio.setItemText(0, self.data["Colegio"])
-        self.Colegio.setItemText(1, self.data["Universidad"])
+        self.datas = self.datos[self.idioma]
+        self.label.setText(self.datas["Instituciones"])
+        self.editline.setPlaceholderText(self.datas["NombreProyecto"])
+        self.zona.setText(self.datas["Zona"])
+        self.direccion.setText(self.datas["direccion"])
+        self.Colegio.setItemText(0, self.datas["Colegio"])
+        self.Colegio.setItemText(1, self.datas["Universidad"])
+        self.zonatext.setPlaceholderText(self.datas["NombreZona"])
+        self.direcciontext.setPlaceholderText(self.datas["NombreDireccion"])
+        #Bloquea direcciones de empresa en ingles debido a que faltan esos datos
         if self.idioma != "EN":
             self.direccion.setEnabled(True)
         else:
             if self.Colegio.currentIndex() == 1:
                 self.direccion.setEnabled(False)
-        self.rellenarDatos()  # Método para rellenar los datos de Comunidad si es necesario
+                self.direccion.setChecked(False)
+        self.rellenarDatos()  
 
     def cambiarIndice(self):
+        """
+            Bloquea direccion debido a la falta de informacion.
+        """        
         self.rellenarDatos()
         if self.Colegio.currentIndex() ==0 :
             self.direccion.setEnabled(True)
@@ -64,60 +138,62 @@ class InstitucionesWidget(QWidget):
                 self.direccion.setEnabled(False)
                 self.direccion.setChecked(False)
     def rellenarDatos(self):
+        """
+            Metodo que Accede a MongoDB y recoge las zonas, lo agrupara para que no se repita en el combobox
+            y rellene el combobox
+        """        
         self.Comunidad.clear()
         self.Comunidad.addItem("-")
         cliente = pymongo.MongoClient("mongodb://localhost:27017/")
         db = cliente["Instituciones"]
+        #Comprueba el index
         if self.Colegio.currentIndex()== 0:
-            print(self.data["Colegio"])
-            dd = db[self.data["Colegio"]]
+            dd = db[self.datas["Colegio"]]
         else:
-            print(self.data["Universidad"])
-            dd = db[self.data["Universidad"]]
+            dd = db[self.datas["Universidad"]]
         datos = dd.aggregate([
             { "$group": { "_id": "$TOWN", "town": { "$addToSet": "$TOWN" } } }
         ])
+        #rellena los datos en el combobox
         for dato in datos:
             if not type(dato["town"][0])== float:
                 self.Comunidad.addItem(dato["town"][0])
 
     def getData(self,cantidad):
-        titulo = self.editline.text() or self.data["Instituciones"]
-        nom = []
-        comun = []
-        direc = []
+        """
+            Devuelve una lista de datos recogida en el RESTAPI
+        Args:
+            cantidad (int): Cantidad de datos que quiere devolver
+
+        Returns:
+            dict: devuelve un diccionario con los datos elegidos
+        """
+        #Comprueba que el editline esta con texto y sino pone uno default
+        titulo = self.editline.text() or self.datas["Instituciones"]
+        direccion = self.direcciontext.text() or self.datas["direccion"]
+        zona = self.zonatext.text() or self.datas["Zona"]
         dicts = {}
-        for i in range(cantidad):
-            data = self.getInstitution()
-            nom.append(data["name"])
-            if self.direccion.isChecked():
-                direc.append(data["Street"])
-            if self.zona.isChecked():
-                comun.append(data["TOWN"])
-        dicts[titulo] = nom
+        #Accede al REST API
+        url = f"http://localhost:5000/instituciones/{self.Colegio.currentIndex()}/{self.Comunidad.currentText()}/{cantidad}/{self.idioma}"
+        response = requests.get(url)
+        dataset = response.json()
+        #Comprueba los datos y que checkbox estan checkeados
+        dicts[titulo] = dataset["name"]
         if self.direccion.isChecked():
-            dicts[self.data["direccion"]] = direc
+            dicts[direccion] = dataset["address"]
         if self.zona.isChecked():
-            dicts[self.data["Zona"]]=comun
+            dicts[zona]=dataset["area"]
+        #comprueba si la cantidad de datos es igual al pedido sino lo duplica aleatoriamente
+        if len(dicts[titulo]) <cantidad:
+            for i in range(cantidad - len(dicts[titulo])):
+                num = random.randint(0,len(dicts[titulo]))
+                dicts[titulo].append(dicts[titulo][num-1])
+                if self.direccion.isChecked():
+                    dicts[direccion].append(dicts[direccion][num-1])
+                if self.zona.isChecked():
+                    dicts[zona].append(dicts[zona][num-1])
         return dicts
-    def getInstitution(self):
-        cliente = pymongo.MongoClient("mongodb://localhost:27017/")
-        db = cliente["Instituciones"]
-        if self.Colegio.currentIndex()==0:
-            dd = db[self.data["Colegio"]]
-        else:
-            dd = db[self.data["Universidad"]]
-        if self.Comunidad.currentText() == "-":
-            data = dd.aggregate([{ "$sample": { "size": 1 }}]).next()
-        else:
-            datos = dd.aggregate([
-                { "$match": { "TOWN": self.Comunidad.currentText()} },  # Filtrar por género "M"
-                { "$sample": { "size": 1 } }       # Seleccionar un documento aleatorio
-                ])
-            data = {}
-            for dat in datos:
-                data = dat
-        return data
+    
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)

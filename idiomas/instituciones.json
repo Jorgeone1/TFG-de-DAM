@@ -4,8 +4,12 @@
         "Universidad": "Universidad",
         "Instituciones": "Instituciones:",
         "Zona": "Zona",
-        "direccion": "direccion",
-        "NombreProyecto": "Nombre Proyecto"
+        "direccion": "Direccion",
+        "NombreProyecto": "Nombre Proyecto",
+        "NombreZona":"Nombre Zona",
+        "NombreDireccion":"Nombre Direccion",
+        "ayuda1":"Muestra el area donde esta ubicado",
+        "ayuda2":"Muestra la direccion"
     },
     "EN": {
         "Colegio": "College",
@@ -13,6 +17,10 @@
         "Instituciones": "Institutions:",
         "Zona": "Area",
         "direccion": "Address",
-        "NombreProyecto": "Project Name"
+        "NombreProyecto": "Project Name",
+        "NombreZona":"Zone Name",
+        "NombreDireccion":"Address Name",
+        "ayuda1":"Shows the area where it is located",
+        "ayuda2": "Display the address"
     }
 }

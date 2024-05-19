@@ -1,0 +1,18 @@
+{
+    "ES": {
+        "color":"Color",
+        "NombreProyecto":"Nombre Proyecto",
+        "nohex":"Sin HEX",
+        "nombrergb":"Nombre RGB",
+        "ayuda1":"Muestra los Colores en el formato RGB",
+        "ayuda2": "Elimina del diccionario la columna HEX"
+    },
+    "EN":{
+        "color": "Color",
+        "NombreProyecto": "Project Name",
+        "nohex": "No HEX",
+        "nombrergb": "RGB Name",
+        "ayuda1": "Displays the Colors in RGB format",
+        "ayuda2": "Removes the HEX column from the dictionary"
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "ES":{
+        "telefono":"Telefono",
+        "fijo": "Fijo",
+        "NombreProyecto":"Nombre Proyecto",
+        "NombreTelefono":"Nombre Telefono Fijo",
+        "sinmobil":"Sin Mobil",
+        "ayuda1":"Genera telefonos fijos, en el cuadro de texto el nombre",
+        "ayuda2":"Elimina la columna de telefonos mobil"
+    },
+    "EN":{
+        "telefono": "Phone",
+        "fijo": "Landline",
+        "NombreProyecto": "Project Name",
+        "NombreTelefono": "Landline Name",
+        "sinmobil": "No Mobile",
+        "ayuda1": "Generates landline phones, the name in the text box",
+        "ayuda2": "Removes the mobile phone column"
+    }
+}

@@ -2,12 +2,32 @@
     "ES":{
         "Nombre": "Nombre",
         "Apellido":"Apellido",
-        "Genero":"Genero"
+        "Genero":"Genero",
+        "separar":"Separar apellidos",
+        "correo":"Correo",
+        "Dominio":"Dominio",
+        "DominioName":"Nombre Dominio",
+        "NombreProyecto":"Nombre Proyecto",
+        "NombreApellido":"Nombre del apellido (Opcional)",
+        "ayuda1":"Genera apellidos para los nombres",
+        "ayuda2":"Separa el apellido del nombre\n y lo pone en su propia columna",
+        "ayuda3":"Genera un correo, en el cuadro de texto podras poner un dominio como gmail",
+        "ayuda4":"Genera un genero aleatorio"
     },
     "EN":{
         "Nombre": "Name",
-        "Apellido":"Surname",
-        "Genero":"Gender"
+        "Apellido": "Surname",
+        "Genero": "Gender",
+        "separar": "Separate surnames",
+        "correo": "Email",
+        "Dominio": "Domain",
+        "DominioName":"Domain Name",
+        "NombreProyecto": "Project Name",
+        "NombreApellido": "Surname name (Optional)",
+        "ayuda1": "Generates surnames for names",
+        "ayuda2": "Separates the surname from the name\n and puts it in its own column",
+        "ayuda3": "Generates an email, you can enter a domain like gmail in the text box",
+        "ayuda4":"Generates an random gender"
     }
 
 }

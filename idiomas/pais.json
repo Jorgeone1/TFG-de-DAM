@@ -1,0 +1,26 @@
+{
+    "ES":{
+        "pais":"Pais",
+        "NombreProyecto":"Nombre Proyecto",
+        "capital":"capital",
+        "continente":"continente",
+        "NombreCapital":"Nombre Capital",
+        "NombreContinente":"Nombre Contiente",
+        "sinpais":"Sin Pais",
+        "ayuda1":"Muestra la capital del país",
+        "ayuda2":"Muestra el continente del país",
+        "ayuda3":"Elimina la columna de Pais"
+    },
+    "EN":{
+        "pais": "Country",
+        "NombreProyecto": "Project Name",
+        "capital": "Capital",
+        "continente": "Continent",
+        "NombreCapital":"Capital Name",
+        "NombreContinente":"Contient Name",
+        "sinpais":"No Country",
+        "ayuda1": "Shows the capital of the country",
+        "ayuda2": "Shows the continent of the country",
+        "ayuda3":"Remove the Country column"
+    }
+}
