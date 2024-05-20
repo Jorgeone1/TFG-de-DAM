@@ -13,6 +13,19 @@ db = cliente["GeneradorDeDatos"]
 # Cargar datos de nombres una sola vez
 @app.route("/nombres/<genero>/<idioma>/<int:cantidad>/<dominio>")
 def generarNombre(genero, idioma, cantidad,dominio):
+    """
+    Método que genera nombres y apellidos y los imprime en la ruta de arriba /nombres/<genero>/<idioma>/<int:cantidad>/<dominio>
+    
+
+    Args:
+        genero (string): valor que puede ser - M F representa un tipo de datos la cual se quiere sacar
+        idioma (string): idioma en la que se salga debido a que los ingleses tienen un apellido
+        cantidad (int): cantidad de datos a imprimir
+        dominio (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """    
     cursor = db["NombreEng"]
     cursor2 = db["Apellidos"]
     noms = []

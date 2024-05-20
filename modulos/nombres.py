@@ -177,7 +177,7 @@ class NombreWidget(QWidget):
         """
         #comprueba que los editline tienen un nombre o sino pondra uno por defecto
         titulo = self.editline.text() or self.datas["Nombre"]
-        dominio = self.dominio or "Gmail"
+        dominio = self.dominio.text() or "Gmail"
         apellid = self.apellidonom.text() or self.datas["Apellido"]
         #accede a la rest api
         url = f'http://127.0.0.1:5000/nombres/{self.genero.currentText()}/{self.idioma}/{cantidad}/{dominio}'
@@ -193,7 +193,7 @@ class NombreWidget(QWidget):
                 for i in range(len(dicts[titulo])):
                     dicts[titulo][i-1] = dicts[titulo][i-1] + " "+ data["Apellido"][i-1]
         if self.correo.isChecked():
-            dicts[self.data["correo"]] = data["correo"]
+            dicts[self.datas["correo"]] = data["correo"]
         if self.generobox.isChecked():
             dicts[self.datas["Genero"]]= data["Genero"]
         

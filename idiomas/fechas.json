@@ -31,7 +31,8 @@
         "NombreProyecto": "Nombre Proyecto",
         "ayuda1":"formato de largo (dia de mes de año)\nCorto (dia{separador}mes{separador}año{separador})",
         "error1":"La fecha no es valida o el separador no esta permitido",
-        "error2":"La fecha final debe ser mayor al de inicio"
+        "error2":"La fecha final debe ser mayor al de inicio",
+        "error3":"Las fecha inicial o final no pueden estar vacias"
     },
     "EN": {
         "1": "January",
@@ -65,7 +66,8 @@
         "NombreProyecto": "Project Name",
         "ayuda1":"long format (day of the month of the year)\n(day{separator}month{separator}year{separator})",
         "error1":"The date is invalid or the separator is not allowed",
-        "error2":"The end date must be longer than the start date"
+        "error2":"The end date must be longer than the start date",
+        "error3":"The end date or start date cannot be empty"
 
     }
 }

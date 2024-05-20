@@ -121,7 +121,8 @@ class FechaWidget(QWidget):
             separador = self.separador.text() or " "
             fechainicio = self.fechainicio.text()
             fechafinal = self.fechafinal.text()
-            #Comprueba que las fechas son validas sino lanzara un error
+            if not fechainicio or not fechafinal:
+                raise error.ErrorPrograma(self.datas["error3"])            #Comprueba que las fechas son validas sino lanzara un error
             date = datetime.strptime(fechainicio,r"%d-%m-%Y")
             date2 = datetime.strptime(fechafinal,r"%d-%m-%Y")
             #si la fecha final es menor que la inicial lanzara otro error

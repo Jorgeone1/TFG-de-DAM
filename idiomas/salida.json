@@ -1,0 +1,14 @@
+{
+    "ES": {
+        "error": "Error al subir el Archivo",
+        "Subido": "Subido con Éxito",
+        "Archivo": "Archivo guardado en ",
+        "crear": "Error al crear "
+    },
+    "EN": {
+        "error": "Error uploading the ",
+        "Subido": "Successfully Uploaded",
+        "Archivo": "File saved at ",
+        "crear": "Error creating the File"
+    }
+}

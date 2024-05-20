@@ -9,7 +9,7 @@
         "decimales":"Decimales",
         "ayuda1":"Elige enteros en vez de decimales",
         "ayuda2":"Elige cantidad de decimales",
-        "error1":"Hay que poner datos validos",
+        "error1":"Hay que poner numeros validos",
         "error2":"Tiene que ser un Numero Valido"
     },
     "EN":{
@@ -22,7 +22,7 @@
         "decimales": "Decimals",
         "ayuda1": "Choose integers instead of decimals",
         "ayuda2": "Choose the number of decimals",
-        "error1": "You must enter valid data",
+        "error1": "You must enter valid numbers",
         "error2":"You must choose a valid number"
     }
  }

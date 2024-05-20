@@ -165,7 +165,6 @@ class NumeroWidget(QWidget):
             url = f"http://localhost:5000/numeros/{int(self.entero.isChecked())}/{self.minimoe.text()}/{self.maximoe.text()}/{self.decimales.currentText()}/{cantidad}"
             response = requests.get(url)
             data = response.json()
-            print(data)
             if len(data["numeros"]) != cantidad:
                 raise error.ErrorPrograma("Error en los datos introducidos")
             dicts[titulo] = data["numeros"]

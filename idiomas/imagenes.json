@@ -5,7 +5,7 @@
         "Obligatorio": "Obligatorio: ",
         "buscador":"Buscador",
         "ayuda1":"Pon algun nombre para buscarlo",
-        "error1":"No puede estar vacio el buscador",
+        "error1":"No puede estar vacio el buscador de imagenes",
         "error2":"No se encontraron resultados de "
     },
     "EN":{
@@ -14,7 +14,7 @@
         "Obligatorio": "Mandatory: ",
         "buscador": "Search",
         "ayuda1": "Enter a name to search for",
-        "error1": "The search cannot be empty",
+        "error1": "The search of images cannot be empty",
         "error2": "No results found for "
     }
 }

@@ -1,0 +1,16 @@
+{
+    "ES":{
+        "otros":"Otros",
+        "NombreProyecto":"Nombre Proyecto",
+        "Abrir":"Abrir Archivo",
+        "error1":"Error no se pudo cargar el Archivo",
+        "error2":"No se pudo cargar el csv"
+    },
+    "EN":{
+        "otros": "Others",
+        "NombreProyecto": "Project Name",
+        "Abrir": "Open File",
+        "error1": "Error, could not load the file",
+        "error2": "Could not load the CSV"
+    }
+}

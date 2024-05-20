@@ -1,5 +1,5 @@
 {
-    "Español": {
+    "ES": {
       "nombre": "Nombre",
       "id": "id unico",
       "direccion": "Dirección",
@@ -26,9 +26,15 @@
       "Borrar": "Borrar",
       "Confirmar": "Confirmar",
       "Buscador":"Buscador",
-      "Cantidad": "Cantidad datos"
+      "Cantidad": "Cantidad datos",
+      "Titulo": "Titulo de la base de datos",
+      "error1":"No puede estar vacia el cuadro de texto de cantidad",
+      "error2":"No puede superar el valor entre el rango de [1-1000]",
+      "error3":"Inserte algun módulo",
+      "base":"Base_de_datos",
+      "seleccione":"Seleccione Carpeta"
     },
-    "English": {
+    "EN": {
       "nombre": "Name",
       "id":"id unique",
       "direccion": "Address",
@@ -56,6 +62,12 @@
       "Borrar": "Delete",
       "Confirmar": "Confirm",
       "Buscador":"Filter",
-      "Cantidad": "Data Quantity"
+      "Cantidad": "Data Quantity",
+      "Titulo": "Title of the database",
+      "error1":"The textfield quantity it cannot be empty",
+      "error2":"Cannot exceed the value between the range of [1-1000]",
+      "error3":"Insert a module",
+      "base":"Database",
+      "seleccione":"Select File"
     }
   }
